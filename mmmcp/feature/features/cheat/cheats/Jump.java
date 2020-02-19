@@ -28,7 +28,9 @@ public class Jump extends Cheat {
 
             case "EventLivingUpdate":
 
-                minecraft.gameSettings.keyBindJump.pressed = true;
+                if (minecraft.currentScreen == null) {
+                    minecraft.gameSettings.keyBindJump.pressed = true;
+                }
 
                 return null;
 

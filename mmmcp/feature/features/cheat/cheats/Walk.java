@@ -28,7 +28,9 @@ public class Walk extends Cheat {
 
             case "EventLivingUpdate":
 
-                minecraft.gameSettings.keyBindForward.pressed = true;
+                if (minecraft.currentScreen == null) {
+                    minecraft.gameSettings.keyBindForward.pressed = true;
+                }
 
                 return null;
 

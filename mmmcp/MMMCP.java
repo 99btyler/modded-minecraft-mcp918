@@ -1,10 +1,7 @@
 package mmmcp;
 
 import mmmcp.feature.Feature;
-import mmmcp.feature.features.cheat.cheats.Jump;
-import mmmcp.feature.features.cheat.cheats.Sneak;
-import mmmcp.feature.features.cheat.cheats.Sprint;
-import mmmcp.feature.features.cheat.cheats.Walk;
+import mmmcp.feature.features.cheat.cheats.*;
 import mmmcp.feature.features.screen.screens.ScreenGuiIngame;
 import org.lwjgl.input.Keyboard;
 
@@ -22,6 +19,7 @@ public class MMMCP {
 
                 new Jump(Keyboard.KEY_J, false),
                 new Walk(Keyboard.KEY_K, false),
+                new InvMove(Keyboard.KEY_L, false),
                 new Sneak(Keyboard.KEY_Z, false),
                 new Sprint(Keyboard.KEY_C, false),
 
@@ -37,6 +35,15 @@ public class MMMCP {
 
     public final Feature[] getFeatures() {
         return features;
+    }
+
+    public final Feature getFeature(String featureName) {
+        for (Feature feature : features) {
+            if (feature.getName().equals(featureName)) {
+                return feature;
+            }
+        }
+        return null;
     }
 
 }

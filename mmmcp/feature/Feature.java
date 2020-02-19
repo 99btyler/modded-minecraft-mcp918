@@ -29,6 +29,14 @@ public abstract class Feature {
 
     }
 
+    public final String getName() {
+        return name;
+    }
+
+    public final boolean isEnabled() {
+        return enabled;
+    }
+
     public final void tryToggle(int keybind) {
 
         if (this.keybind != keybind) {
