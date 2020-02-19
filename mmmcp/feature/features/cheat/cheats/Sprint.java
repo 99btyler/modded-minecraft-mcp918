@@ -23,7 +23,7 @@ public class Sprint extends Cheat {
     }
 
     @Override
-    protected void onEvent(Event event) {
+    protected Event onEvent(Event event) {
 
         switch (event.getName()) {
 
@@ -31,10 +31,10 @@ public class Sprint extends Cheat {
 
                 minecraft.gameSettings.keyBindSprint.pressed = true;
 
-                break;
+                return null;
 
             default:
-                break;
+                return null;
 
         }
 

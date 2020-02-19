@@ -57,14 +57,16 @@ public abstract class Feature {
         System.out.println(name + ".setupEventNames() wasn't overridden");
     }
 
-    public final void tryOnEvent(Event event) {
+    public final Event tryOnEvent(Event event) {
         if (enabled && eventNames.contains(event.getName())) {
-            onEvent(event);
+            return onEvent(event);
         }
+        return null;
     }
 
-    protected void onEvent(Event event) {
+    protected Event onEvent(Event event) {
         System.out.println(name + ".onEvent() wasn't overridden");
+        return null;
     }
 
 }
