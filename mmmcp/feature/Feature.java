@@ -10,7 +10,7 @@ public abstract class Feature {
 
     protected final String name;
 
-    private int keybind;
+    protected int keybind;
     protected boolean enabled;
 
     private List<String> eventNames;
