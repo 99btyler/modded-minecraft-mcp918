@@ -38,6 +38,9 @@ public final MMMCP getMMMCP() {
 for (Feature feature : mmmcp.getFeatures()) {
   feature.tryToggle(i);
 }
+
+// Change private to public:
+public void clickMouse()
 ```
 5. Inside the mcp928 folder, find & open the eclipse folder using a Java IDE
 
