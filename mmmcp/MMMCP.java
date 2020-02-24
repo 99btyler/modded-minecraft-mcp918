@@ -21,6 +21,7 @@ public class MMMCP {
                 new Jump(Keyboard.KEY_J, false),
                 new Walk(Keyboard.KEY_K, false),
                 new InvMove(Keyboard.KEY_L, false),
+                new Bright(Keyboard.KEY_B, false),
                 new Sneak(Keyboard.KEY_Z, false),
                 new Sprint(Keyboard.KEY_C, false),
 
