@@ -15,6 +15,14 @@ for (Feature feature : this.mc.getMMMCP().getFeatures()) {
 }
 ```
 ```java
+// GuiIngame.java
+
+// At the start of the renderPotionEffects() method:
+if (this.mc.getMMMCP().getFeature("ScreenGuiIngame").isEnabled()) {
+  return;
+}
+```
+```java
 // KeyBinding.java
 
 // Change private to public:
