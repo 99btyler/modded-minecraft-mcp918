@@ -31,6 +31,9 @@ public boolean pressed;
 ```java
 // Minecraft.java
 
+// Change private final to public:
+public Session session;
+
 // After all the other variables:
 private MMMCP mmmcp;
 
