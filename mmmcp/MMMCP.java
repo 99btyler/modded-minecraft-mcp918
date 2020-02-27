@@ -2,6 +2,7 @@ package mmmcp;
 
 import mmmcp.feature.Feature;
 import mmmcp.feature.features.cheat.cheats.*;
+import mmmcp.feature.features.screen.screens.ScreenAccount;
 import mmmcp.feature.features.screen.screens.ScreenGuiIngame;
 import org.lwjgl.input.Keyboard;
 
@@ -25,7 +26,8 @@ public class MMMCP {
                 new Sneak(Keyboard.KEY_Z, false),
                 new Sprint(Keyboard.KEY_C, false),
 
-                new ScreenGuiIngame(Keyboard.KEY_RSHIFT, true)
+                new ScreenGuiIngame(Keyboard.KEY_RSHIFT, true),
+                new ScreenAccount(Keyboard.KEY_RBRACKET, false)
 
         };
 
