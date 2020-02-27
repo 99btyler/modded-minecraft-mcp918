@@ -50,6 +50,9 @@ for (Feature feature : mmmcp.getFeatures()) {
   feature.tryToggle(i);
 }
 
+// In the dispatchKeypresses() method after the i == this.gameSettings.keyBindScreenshot.getKeyCode() check:
+ScreenShotHelper.saveScreenshot(this.mcDataDir, this.displayWidth, this.displayHeight, this.framebufferMc);
+
 // Change private to public:
 public void clickMouse()
 ```
