@@ -19,6 +19,7 @@ public class MMMCP {
         features = new Feature[] {
 
                 new Triggerbot(Keyboard.KEY_R, false),
+                new Outline(Keyboard.KEY_O, false),
                 new Jump(Keyboard.KEY_J, false),
                 new Walk(Keyboard.KEY_K, false),
                 new InvMove(Keyboard.KEY_L, false),
