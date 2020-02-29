@@ -27,7 +27,7 @@ public class Tracers extends Cheat {
             float[] color = new float[] {1.0F, 1.0F, 1.0F};
             final String entityPlayerName = entityPlayer.getDisplayName().getUnformattedText();
             if (entityPlayerName.contains("§4") || entityPlayerName.contains("§c")) {
-                color = new float[] {1.0F, 1.0F, 1.0F};
+                color = new float[] {1.0F, 0.0F, 0.0F};
             } else if (entityPlayerName.contains("§2") || entityPlayerName.contains("§a")) {
                 color = new float[] {0.0F, 1.0F, 0.0F};
             } else if (entityPlayerName.contains("§1") || entityPlayerName.contains("§3") || entityPlayerName.contains("§9") || entityPlayerName.contains("§b")) {

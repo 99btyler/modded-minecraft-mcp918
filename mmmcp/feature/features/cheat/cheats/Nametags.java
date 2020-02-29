@@ -18,7 +18,7 @@ public class Nametags extends Cheat {
     public final void doNametag(EntityPlayer entityPlayer, String entityPlayerName, double x, double y, double z, RenderManager renderManager, FontRenderer fontRenderer) {
 
         final double distance = minecraft.thePlayer.getDistanceToEntity(entityPlayer);
-        entityPlayerName += " | " + (int)distance;
+        entityPlayerName += "§r | " + (int)distance;
 
         final Scoreboard scoreboard = entityPlayer.getWorldScoreboard();
         final ScoreObjective scoreObjective = scoreboard.getObjectiveInDisplaySlot(2);
