@@ -72,6 +72,15 @@ public double renderPosX;
 public double renderPosY;
 public double renderPosZ;
 ```
+```java
+// RenderPlayer.java
+
+// At the start of the renderEntityName() method:
+if (Minecraft.getMinecraft().getMMMCP().getFeature("Nametags").isEnabled()) {
+  ((Nametags)Minecraft.getMinecraft().getMMMCP().getFeature("Nametags")).doNametag(entityIn, entityIn.getName(), x, y, z, renderManager, getFontRendererFromRenderManager());
+  return;
+}
+```
 5. Inside the mcp928 folder, find & open the eclipse folder using a Java IDE
 
 # Screenshots
