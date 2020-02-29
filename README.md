@@ -77,7 +77,7 @@ public double renderPosZ;
 
 // At the start of the renderEntityName() method:
 if (Minecraft.getMinecraft().getMMMCP().getFeature("Nametags").isEnabled()) {
-  ((Nametags)Minecraft.getMinecraft().getMMMCP().getFeature("Nametags")).doNametag(entityIn, entityIn.getName(), x, y, z, renderManager, getFontRendererFromRenderManager());
+  ((Nametags)Minecraft.getMinecraft().getMMMCP().getFeature("Nametags")).doNametag(entityIn, entityIn.getDisplayName().getUnformattedText(), x, y, z, renderManager, getFontRendererFromRenderManager());
   return;
 }
 ```
