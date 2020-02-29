@@ -15,6 +15,14 @@ for (Feature feature : this.mc.getMMMCP().getFeatures()) {
 }
 ```
 ```java
+// EntityRenderer.java
+
+// At the start of the renderHand() method:
+if (Minecraft.getMinecraft().getMMMCP().getFeature("Tracers").isEnabled()) {
+  ((Tracers)Minecraft.getMinecraft().getMMMCP().getFeature("Tracers")).doTracers();
+}
+```
+```java
 // GuiIngame.java
 
 // At the start of the renderPotionEffects() method:
@@ -55,6 +63,14 @@ ScreenShotHelper.saveScreenshot(this.mcDataDir, this.displayWidth, this.displayH
 
 // Change private to public:
 public void clickMouse()
+```
+```java
+// RenderManager.java
+
+// Change private to public:
+public double renderPosX;
+public double renderPosY;
+public double renderPosZ;
 ```
 5. Inside the mcp928 folder, find & open the eclipse folder using a Java IDE
 
