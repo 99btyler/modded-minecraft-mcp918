@@ -14,7 +14,7 @@ public class Triggerbot extends Cheat {
 
         super(keybind, enabled);
 
-        timer = new Timer(200, 250);
+        timer = new Timer(125, 200);
 
     }
 
