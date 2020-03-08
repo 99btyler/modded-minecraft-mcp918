@@ -65,7 +65,7 @@ public class ScreenGuiIngame extends Screen {
             final List<String> cheatNames = new ArrayList<>();
             for (Feature feature : minecraft.getMMMCP().getFeatures()) {
                 if (feature instanceof Cheat) {
-                    cheatNames.add((feature.isEnabled() ?  tagBD : tagBDT) + (feature.getName()));
+                    cheatNames.add((feature.isEnabled() ?  tagBD : tagBDT) + (feature.getName() + (feature.isEnabled() ? (feature.getTag() != null ? (" [" + feature.getTag() + "§r]") : "") : "")));
                 }
             }
             doSection(3, cheatNames.toArray(new String[0]));

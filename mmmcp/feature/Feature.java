@@ -77,4 +77,8 @@ public abstract class Feature {
         return null;
     }
 
+    public String getTag() {
+        return null;
+    }
+
 }
