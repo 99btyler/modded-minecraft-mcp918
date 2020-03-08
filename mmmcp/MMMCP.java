@@ -20,6 +20,7 @@ public class MMMCP {
 
                 new Triggerbot(Keyboard.KEY_R, false),
                 new Bright(Keyboard.KEY_B, false),
+                new Hold(Keyboard.KEY_N, false),
                 new Nametags(Keyboard.KEY_I, false),
                 new Outline(Keyboard.KEY_O, false),
                 new Tracers(Keyboard.KEY_P, false),
