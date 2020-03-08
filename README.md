@@ -61,6 +61,11 @@ for (Feature feature : mmmcp.getFeatures()) {
 // In the dispatchKeypresses() method after the i == this.gameSettings.keyBindScreenshot.getKeyCode() check:
 ScreenShotHelper.saveScreenshot(this.mcDataDir, this.displayWidth, this.displayHeight, this.framebufferMc);
 
+// At the start of the rightClickMouse() method:
+for (Feature feature : mmmcp.getFeatures()) {
+  feature.tryOnEvent(new EventRightClick());
+}
+
 // Change private to public:
 public void clickMouse()
 ```
