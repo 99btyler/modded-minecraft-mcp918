@@ -27,6 +27,7 @@ public class MMMCP {
                 new Jump(Keyboard.KEY_J, false),
                 new Walk(Keyboard.KEY_K, false),
                 new InvMove(Keyboard.KEY_L, false),
+                new Freecam(Keyboard.KEY_V, false),
                 new Sneak(Keyboard.KEY_Z, false),
                 new Sprint(Keyboard.KEY_C, false),
 
@@ -52,6 +53,15 @@ public class MMMCP {
             }
         }
         return null;
+    }
+
+    public final void tryToggleFeatures(boolean desiredEnabled, String...featureNames) {
+        for (String featureName : featureNames) {
+            final Feature feature = getFeature(featureName);
+            if (feature.isEnabled() != desiredEnabled) {
+                feature.tryToggle(feature.getKeybind());
+            }
+        }
     }
 
 }

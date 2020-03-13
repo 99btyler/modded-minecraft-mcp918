@@ -37,6 +37,10 @@ public abstract class Feature {
         return enabled;
     }
 
+    public final int getKeybind() {
+        return keybind;
+    }
+
     public final void tryToggle(int keybind) {
 
         if (this.keybind != keybind) {
