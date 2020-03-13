@@ -7,6 +7,17 @@ Have a modded version of Minecraft 1.9.4 using mcp928
 3. Inside the mcp928 folder, find & run the decompile.sh or decompile.bat file
 4. Because mcp928 allows us to change Minecraft code, we will. Manually add this required code:
 ```java
+// CPacketPlayer.java
+
+// Change protected to public:
+public double x;
+public double y;
+public double z;
+public float yaw;
+public float pitch;
+public boolean onGround;
+```
+```java
 // EntityPlayerSP.java
 
 // After the onLivingUpdate() method:
@@ -68,6 +79,26 @@ for (Feature feature : mmmcp.getFeatures()) {
 
 // Change private to public:
 public void clickMouse()
+```
+```java
+// NetHandlerPlayClient.java
+
+// At the start of the sendPacket() method:
+for (Feature feature : Minecraft.getMinecraft().getMMMCP().getFeatures()) {
+
+  final EventSendPacket eventSendPacket = (EventSendPacket)feature.tryOnEvent(new EventSendPacket(packetIn));
+  
+  if (eventSendPacket != null) {
+    
+    if (eventSendPacket.isCanceled()) {
+      return;
+    }
+    
+    packetIn = eventSendPacket.getPacket();
+    
+  }
+
+}
 ```
 ```java
 // RenderManager.java
