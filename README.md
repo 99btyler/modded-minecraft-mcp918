@@ -42,6 +42,12 @@ if (this.mc.getMMMCP().getFeature("ScreenGuiIngame").isEnabled()) {
 }
 ```
 ```java
+// GuiIngameMenu.java
+
+// In the actionPerformed() method after the case 1 check:
+this.mc.getMMMCP().tryToggleFeatures(false, "Bright");
+```
+```java
 // KeyBinding.java
 
 // Change private to public:
