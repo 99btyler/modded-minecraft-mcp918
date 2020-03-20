@@ -20,9 +20,14 @@ public boolean onGround;
 ```java
 // EntityPlayerSP.java
 
-// After the onLivingUpdate() method:
+// At the start of the onLivingUpdate() method:
 for (Feature feature : this.mc.getMMMCP().getFeatures()) {
   feature.tryOnEvent(new EventLivingUpdate());
+}
+
+// At the start of the attackEntityFrom() method:
+if (source != DamageSource.inWall) {
+  this.mc.getMMMCP().tryToggleFeatures(false, "Freecam");
 }
 ```
 ```java
