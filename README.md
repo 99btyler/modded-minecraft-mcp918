@@ -47,12 +47,6 @@ if (this.mc.getMMMCP().getFeature("ScreenGuiIngame").isEnabled()) {
 }
 ```
 ```java
-// GuiIngameMenu.java
-
-// In the actionPerformed() method after the case 1 check:
-this.mc.getMMMCP().tryToggleFeatures(false, "Bright");
-```
-```java
 // KeyBinding.java
 
 // Change private to public:
@@ -87,6 +81,9 @@ ScreenShotHelper.saveScreenshot(this.mcDataDir, this.displayWidth, this.displayH
 for (Feature feature : mmmcp.getFeatures()) {
   feature.tryOnEvent(new EventRightClick());
 }
+
+// At the start of the shutdownMinecraftApplet() method:
+mmmcp.tryToggleFeatures(false, "Bright");
 
 // Change private to public:
 public void clickMouse()
