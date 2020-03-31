@@ -29,6 +29,9 @@ for (Feature feature : this.mc.getMMMCP().getFeatures()) {
 if (source != DamageSource.inWall) {
   this.mc.getMMMCP().tryToggleFeatures(false, "Freecam");
 }
+
+// At the start of the respawnPlayer() method:
+this.mc.getMMMCP().tryToggleFeatures(false, "Freecam", "Hold", "Jump", "Sneak", "Triggerbot", "Walk");
 ```
 ```java
 // EntityRenderer.java
