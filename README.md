@@ -4,8 +4,10 @@ Have a modded version of Minecraft 1.9.4 using mcp928
 # Using this yourself
 1. Own Minecraft, run Minecraft 1.9.4 at least once
 2. Download mcp928 from http://www.modcoderpack.com/
-3. Inside the mcp928 folder, find & run the decompile.sh or decompile.bat file
-4. Because mcp928 allows us to change Minecraft code, we will. Manually add this required code:
+3. Download this repository
+4. Inside the mcp928 folder, find the src/minecraft folder and put the mmmcp folder from this repository in it
+5. Inside the mcp928 folder, find & run the decompile.sh or decompile.bat file
+6. Because mcp928 allows us to change Minecraft code, we will. Manually add this required code:
 ```java
 // CPacketPlayer.java
 
@@ -128,7 +130,7 @@ if (Minecraft.getMinecraft().getMMMCP().getFeature("Nametags").isEnabled()) {
   return;
 }
 ```
-5. Inside the mcp928 folder, find & open the eclipse folder using a Java IDE
+7. Inside the mcp928 folder, find & open the eclipse folder using a Java IDE
 
 # Screenshots
 N/A
