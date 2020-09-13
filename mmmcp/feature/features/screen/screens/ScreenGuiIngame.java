@@ -10,7 +10,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ScreenGuiIngame extends Screen {
@@ -55,6 +57,9 @@ public class ScreenGuiIngame extends Screen {
             final String fps = (Minecraft.getDebugFPS() >= 60 ? tagBD : tagBR) + ("FPS: " + Minecraft.getDebugFPS());
             final String facing = tagBD + (minecraft.thePlayer.getHorizontalFacing().getName().toUpperCase());
             doSection(2, new String[] {fps, facing});
+
+            String time = tagBD + (new SimpleDateFormat("h:mm a (s)").format(new Date()));
+            doText(time);
 
             final ScaledResolution scaledResolution = new ScaledResolution(minecraft);
 
