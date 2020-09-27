@@ -88,9 +88,6 @@ for (Feature feature : mmmcp.getFeatures()) {
   feature.tryOnEvent(new EventRightClick());
 }
 
-// At the start of the shutdownMinecraftApplet() method:
-mmmcp.tryToggleFeatures(false, "Bright");
-
 // Change private to public:
 public void clickMouse()
 ```
