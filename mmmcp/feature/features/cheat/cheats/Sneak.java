@@ -17,11 +17,6 @@ public class Sneak extends Cheat {
     }
 
     @Override
-    protected void onDisable() {
-        minecraft.gameSettings.keyBindSneak.pressed = false;
-    }
-
-    @Override
     protected Event onEvent(Event event) {
 
         switch (event.getName()) {
@@ -37,6 +32,11 @@ public class Sneak extends Cheat {
 
         }
 
+    }
+
+    @Override
+    protected void onDisable() {
+        minecraft.gameSettings.keyBindSneak.pressed = false;
     }
 
 }

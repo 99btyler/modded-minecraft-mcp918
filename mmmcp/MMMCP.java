@@ -14,10 +14,13 @@ public class MMMCP {
 
     public MMMCP() {
 
+        // modded-minecraft-[mcp version]
+        // mcp928 is for 1.9.4
         name = "modded-minecraft-mcp928";
 
         features = new Feature[] {
 
+                // Cheats
                 new Triggerbot(Keyboard.KEY_R, false),
                 new Hold(Keyboard.KEY_N, false),
                 new Nametags(Keyboard.KEY_I, false),
@@ -30,6 +33,7 @@ public class MMMCP {
                 new Sneak(Keyboard.KEY_Z, false),
                 new Sprint(Keyboard.KEY_C, false),
 
+                // Screens
                 new ScreenGuiIngame(Keyboard.KEY_RSHIFT, true),
                 new ScreenAccount(Keyboard.KEY_RBRACKET, false)
 

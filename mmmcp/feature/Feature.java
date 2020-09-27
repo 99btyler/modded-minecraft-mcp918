@@ -13,12 +13,15 @@ public abstract class Feature {
     protected int keybind;
     protected boolean enabled;
 
+    // Events the feature is listening for. Identified by name for simplicity.
+    // TODO: less hard coding?
     private List<String> eventNames;
 
     protected final static Minecraft minecraft = Minecraft.getMinecraft();
 
     public Feature(int keybind, boolean enabled) {
 
+        // Automatically set the feature's name to whatever its class is named
         name = getClass().getSimpleName();
 
         this.keybind = keybind;

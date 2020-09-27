@@ -17,11 +17,6 @@ public class Jump extends Cheat {
     }
 
     @Override
-    protected void onDisable() {
-        minecraft.gameSettings.keyBindJump.pressed = false;
-    }
-
-    @Override
     protected Event onEvent(Event event) {
 
         switch (event.getName()) {
@@ -39,6 +34,11 @@ public class Jump extends Cheat {
 
         }
 
+    }
+
+    @Override
+    protected void onDisable() {
+        minecraft.gameSettings.keyBindJump.pressed = false;
     }
 
 }

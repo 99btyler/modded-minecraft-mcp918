@@ -14,6 +14,7 @@ public class Triggerbot extends Cheat {
 
         super(keybind, enabled);
 
+        // 125-200 ms delay
         timer = new Timer(125, 200);
 
     }
@@ -30,6 +31,7 @@ public class Triggerbot extends Cheat {
 
             case "EventLivingUpdate":
 
+                // Automatically stop & disable self if any screen opens (chest, chat, inventory, etc)
                 if (minecraft.currentScreen != null) {
                     tryToggle(keybind);
                     return null;

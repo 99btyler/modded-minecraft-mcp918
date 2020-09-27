@@ -17,11 +17,6 @@ public class Walk extends Cheat {
     }
 
     @Override
-    protected void onDisable() {
-        minecraft.gameSettings.keyBindForward.pressed = false;
-    }
-
-    @Override
     protected Event onEvent(Event event) {
 
         switch (event.getName()) {
@@ -39,6 +34,11 @@ public class Walk extends Cheat {
 
         }
 
+    }
+
+    @Override
+    protected void onDisable() {
+        minecraft.gameSettings.keyBindForward.pressed = false;
     }
 
 }

@@ -14,10 +14,12 @@ public class Timer {
 
     public Timer(int min, int max) {
 
+        // Set lastTime
         reset();
 
         random = new Random();
         currentDelay = 0;
+        // Because currentDelay is 0, the first hasReached() will be instantaneous
 
         this.min = min;
         this.max = max;
@@ -28,9 +30,15 @@ public class Timer {
 
         if ((getCurrentTime() - lastTime) >= currentDelay) {
 
+            // New lastTime
             reset();
+
+            // New random currentDelay (between min and max)
             currentDelay = (random.nextInt(max - min + 1) + min);
+
+            // Confirm hasReached()
             return true;
+            // Timer automatically starts using the new lastTime and currentDelay
 
         } else {
             return false;

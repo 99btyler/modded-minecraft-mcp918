@@ -15,11 +15,12 @@ public class Nametags extends Cheat {
         super(keybind, enabled);
     }
 
+    // Each nametag is made of two lines: NAME and SCORE
     public final void doNametag(EntityPlayer entityPlayer, String entityPlayerName, double x, double y, double z, RenderManager renderManager, FontRenderer fontRenderer) {
 
         final double distance = minecraft.thePlayer.getDistanceToEntity(entityPlayer);
-        entityPlayerName += "§r | " + (int)distance;
 
+        // SCORE
         final Scoreboard scoreboard = entityPlayer.getWorldScoreboard();
         final ScoreObjective scoreObjective = scoreboard.getObjectiveInDisplaySlot(2);
         if (scoreObjective != null) {
@@ -28,6 +29,8 @@ public class Nametags extends Cheat {
             y += (fontRenderer.FONT_HEIGHT * 1.15F * 0.025F) + (0.04 * distance);
         }
 
+        // NAME
+        entityPlayerName += "§r | " + (int)distance;
         renderLine(entityPlayer, entityPlayerName, x, y, z, distance, renderManager, fontRenderer);
 
     }

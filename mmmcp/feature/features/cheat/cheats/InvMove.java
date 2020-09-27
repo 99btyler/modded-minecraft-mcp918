@@ -2,10 +2,7 @@ package mmmcp.feature.features.cheat.cheats;
 
 import mmmcp.feature.event.Event;
 import mmmcp.feature.features.cheat.Cheat;
-import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.GuiRepair;
-import net.minecraft.client.gui.GuiScreenBook;
-import net.minecraft.client.gui.inventory.GuiEditSign;
+import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.settings.KeyBinding;
 import org.lwjgl.input.Keyboard;
 
@@ -29,12 +26,14 @@ public class InvMove extends Cheat {
 
             case "EventLivingUpdate":
 
-                if (minecraft.currentScreen instanceof GuiChat || minecraft.currentScreen instanceof GuiEditSign || minecraft.currentScreen instanceof GuiScreenBook || minecraft.currentScreen instanceof GuiRepair) {
+                // Make sure inventory is open
+                if (!(minecraft.currentScreen instanceof GuiInventory)) {
                     return null;
                 }
 
-                KeyBinding.setKeyBindState(minecraft.gameSettings.keyBindJump.getKeyCode(), (Keyboard.isKeyDown(minecraft.gameSettings.keyBindJump.getKeyCode()) || minecraft.getMMMCP().getFeature("Jump").isEnabled()));
+                // Force Minecraft to acknowledge keyBindForward and keyBindJump
                 KeyBinding.setKeyBindState(minecraft.gameSettings.keyBindForward.getKeyCode(), (Keyboard.isKeyDown(minecraft.gameSettings.keyBindForward.getKeyCode()) || minecraft.getMMMCP().getFeature("Walk").isEnabled()));
+                KeyBinding.setKeyBindState(minecraft.gameSettings.keyBindJump.getKeyCode(), (Keyboard.isKeyDown(minecraft.gameSettings.keyBindJump.getKeyCode()) || minecraft.getMMMCP().getFeature("Jump").isEnabled()));
 
                 return null;
 

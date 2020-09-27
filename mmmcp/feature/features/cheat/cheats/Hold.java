@@ -16,6 +16,7 @@ public class Hold extends Cheat {
 
         slotToHold = -1;
         stoppedHolding = true;
+        // Because stoppedHolding is true, the first assumption will be to start holding
 
     }
 
@@ -23,12 +24,6 @@ public class Hold extends Cheat {
     protected void setupEventNames(List<String> eventNames) {
         eventNames.add("EventLivingUpdate");
         eventNames.add("EventRightClick");
-    }
-
-    @Override
-    protected void onDisable() {
-        slotToHold = -1;
-        minecraft.gameSettings.keyBindUseItem.pressed = false;
     }
 
     @Override
@@ -40,14 +35,19 @@ public class Hold extends Cheat {
 
                 if (minecraft.thePlayer.inventory.currentItem == slotToHold) {
 
+                    // Start holding
                     minecraft.gameSettings.keyBindUseItem.pressed = true;
                     stoppedHolding = false;
 
                 } else {
 
+                    // Make sure we haven't already stopped holding
                     if (!stoppedHolding) {
+
+                        // Stop holding
                         minecraft.gameSettings.keyBindUseItem.pressed = false;
                         stoppedHolding = true;
+
                     }
 
                 }
@@ -67,6 +67,12 @@ public class Hold extends Cheat {
 
         }
 
+    }
+
+    @Override
+    protected void onDisable() {
+        slotToHold = -1;
+        minecraft.gameSettings.keyBindUseItem.pressed = false;
     }
 
     @Override

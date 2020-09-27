@@ -18,17 +18,6 @@ public class Outline extends Cheat {
     }
 
     @Override
-    protected void onDisable() {
-
-        for (EntityPlayer entityPlayer : minecraft.theWorld.playerEntities) {
-            if (entityPlayer != minecraft.thePlayer) {
-                entityPlayer.setGlowing(false);
-            }
-        }
-
-    }
-
-    @Override
     protected Event onEvent(Event event) {
 
         switch (event.getName()) {
@@ -46,6 +35,17 @@ public class Outline extends Cheat {
             default:
                 return null;
 
+        }
+
+    }
+
+    @Override
+    protected void onDisable() {
+
+        for (EntityPlayer entityPlayer : minecraft.theWorld.playerEntities) {
+            if (entityPlayer != minecraft.thePlayer) {
+                entityPlayer.setGlowing(false);
+            }
         }
 
     }
