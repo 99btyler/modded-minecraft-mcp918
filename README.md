@@ -128,6 +128,3 @@ if (Minecraft.getMinecraft().getMMMCP().getFeature("Nametags").isEnabled()) {
   return;
 }
 ```
-
-# Screenshots
-N/A
