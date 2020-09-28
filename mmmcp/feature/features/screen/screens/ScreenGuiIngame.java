@@ -44,6 +44,7 @@ public class ScreenGuiIngame extends Screen {
                 return;
             }
 
+            // STARTING AT TOP LEFT OF SCREEN
             currentX = 5;
             currentY = 5;
             shouldAlignLeft = true;
@@ -61,8 +62,8 @@ public class ScreenGuiIngame extends Screen {
             String time = tagBD + (new SimpleDateFormat("h:mm a (s)").format(new Date()));
             doText(time);
 
+            // MOVING TO TOP RIGHT OF SCREEN
             final ScaledResolution scaledResolution = new ScaledResolution(minecraft);
-
             currentX = scaledResolution.getScaledWidth() - 5;
             currentY = 5;
             shouldAlignLeft = false;
