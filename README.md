@@ -4,11 +4,13 @@ Have a modded version of Minecraft 1.9.4 using mcp928
 # Using this yourself
 1. Own Minecraft, run Minecraft 1.9.4 at least once
 2. Download this repository
-3. Download mcp928 from http://www.modcoderpack.com/
-4. In the mcp928 folder, find & run the decompile.sh or decompile.bat file
-5. In the mcp928 folder, find the src/minecraft folder and put the mmmcp folder from this repository in it
-6. Using a Java IDE, fine & open the eclipse folder in the mcp928 folder
-7. Because mcp928 allows us to change Minecraft code, we will. Manually add this required code:
+3. Download mcp928 folder from http://www.modcoderpack.com/
+4. Put the mcp928 folder inside this repository's folder
+5. Using terminal, navigate to the mcp928 folder. Then, run decompile.sh or decompile.bat
+6. Copy the src folder from this repository and paste it in mcp928/src/minecraft
+7. Using a Java IDE, open mcp928/eclipse
+8. Because mcp928 allows us to change Minecraft code, we will. Manually add this required code:
+
 ```java
 // CPacketPlayer.java
 
