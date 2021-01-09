@@ -132,4 +132,4 @@ if (Minecraft.getMinecraft().getMMMCP().getFeature("Nametags").isEnabled()) {
 ```
 
 # Screenshots
-![mcp298 screenshot](https://i.imgur.com/bau3Ouo.jpg)
+![mcp928 screenshot](https://i.imgur.com/uIjWvxN.jpg)
