@@ -1,15 +1,15 @@
 # modded-minecraft-mcp
-Have a modded version of Minecraft 1.9.4 using mcp928
+Have a modded version of Minecraft 1.8.8 using mcp918
 
 # Using this yourself
-1. Own Minecraft, run Minecraft 1.9.4 at least once
+1. Own Minecraft, run Minecraft 1.8.8 at least once
 2. Download this repository
-3. Download mcp928 folder from http://www.modcoderpack.com/
-4. Put the mcp928 folder inside this repository's folder
-5. Using terminal, navigate to the mcp928 folder. Then, run decompile.sh or decompile.bat
-6. Copy the src folder from this repository and paste it in mcp928/src/minecraft folder. Then, rename the copied src to mmmcp
-7. Using a Java IDE, open mcp928/eclipse
-8. Because mcp928 allows us to change Minecraft code, we will. Manually add this required code:
+3. Download mcp918 folder from http://www.modcoderpack.com/
+4. Put the mcp918 folder inside this repository's folder
+5. Using terminal, navigate to the mcp918 folder. Then, run decompile.sh or decompile.bat
+6. Copy the src folder from this repository and paste it in mcp918/src/minecraft folder. Then, rename the copied src to mmmcp
+7. Using a Java IDE, open mcp918/eclipse
+8. Because mcp918 allows us to change Minecraft code, we will. Manually add this required code:
 
 ```java
 // CPacketPlayer.java
