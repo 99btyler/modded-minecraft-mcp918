@@ -17,106 +17,87 @@ import java.net.Proxy;
 
 public class ScreenAccount extends Screen {
 
-    public ScreenAccount(int keybind, boolean enabled) {
-        super(keybind, enabled);
+    public ScreenAccount(int keybind) {
+        super(keybind);
     }
 
     @Override
     protected void onEnable() {
-        minecraft.displayGuiScreen(new ActualScreenAccount());
+
+        // Enable
+        minecraft.displayGuiScreen(new TheScreenAccount());
+
     }
 
-    private class ActualScreenAccount extends GuiScreen {
+    private class TheScreenAccount extends GuiScreen {
 
-        private GuiTextField guiTextFieldEmail;
-        private GuiTextField guiTextFieldPassword;
-
-        private String message;
+        private GuiTextField inputEmail;
+        private GuiTextField inputPassword;
 
         @Override
         public void initGui() {
-            guiTextFieldEmail = new GuiTextField(0, fontRendererObj, (width / 2) - 90, (((height / 2) - 10) - 10) - 2, 180, 20);
-            guiTextFieldPassword = new GuiTextField(1, fontRendererObj, (width / 2) - 90, (((height / 2) - 10) + 10) + 2, 180, 20);
+            inputEmail = new GuiTextField(0, fontRendererObj, (width / 2) - 90, (height / 2) - 20, 180, 20);
+            inputPassword = new GuiTextField(0, fontRendererObj, (width / 2) - 90, (height / 2), 180, 20);
         }
 
         @Override
         public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-
-            guiTextFieldEmail.drawTextBox();
-
-            guiTextFieldPassword.drawTextBox();
-            if (!guiTextFieldPassword.getText().equals("§7Password")) {
-                drawRect((width / 2) - 90, (((height / 2) - 10) + 10) + 2, ((width / 2) - 90) + 180, ((((height / 2) - 10) + 10) + 2) + 20, colorBackgroundDefault);
-            }
-
-            drawString(fontRendererObj, message, (width / 2) - 90, (((height / 2) - 10) - 10) - 15, colorTextDefault);
-
+            inputEmail.drawTextBox();
+            inputPassword.drawTextBox();
+            drawRect((width / 2) - 90, (height / 2), ((width / 2) - 90) + 180, (height / 2) + 20, colorBackground);
         }
 
         @Override
         public void updateScreen() {
-
-            guiTextFieldEmail.updateCursorCounter();
-            updateFocus(guiTextFieldEmail, "§7Email");
-
-            guiTextFieldPassword.updateCursorCounter();
-            updateFocus(guiTextFieldPassword, "§7Password");
-
-            message = "";
-            if (!guiTextFieldEmail.isFocused() && !guiTextFieldPassword.isFocused()) {
-                message = "Press TAB";
-            } else if (!guiTextFieldEmail.getText().contains("§7") && (!guiTextFieldPassword.getText().contains("§7Password") && !guiTextFieldPassword.getText().isEmpty())) {
-                message = "Press ENTER";
-            }
-
+            inputEmail.updateCursorCounter();
+            inputPassword.updateCursorCounter();
         }
 
         @Override
         protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-            guiTextFieldEmail.mouseClicked(mouseX, mouseY, mouseButton);
-            guiTextFieldPassword.mouseClicked(mouseX, mouseY, mouseButton);
+            inputEmail.mouseClicked(mouseX, mouseY, mouseButton);
+            inputPassword.mouseClicked(mouseX, mouseY, mouseButton);
         }
 
         @Override
         protected void keyTyped(char typedChar, int keyCode) throws IOException {
 
-            guiTextFieldEmail.textboxKeyTyped(typedChar, keyCode);
-            guiTextFieldPassword.textboxKeyTyped(typedChar, keyCode);
+            inputEmail.textboxKeyTyped(typedChar, keyCode);
+            inputPassword.textboxKeyTyped(typedChar, keyCode);
 
             switch (keyCode) {
 
+                // Disable
                 case 1:
                     minecraft.displayGuiScreen(null);
-                    tryToggle(keybind);
+                    toggle();
                     break;
 
                 case 15:
-                    if (!guiTextFieldEmail.isFocused() && !guiTextFieldPassword.isFocused()) {
-                        guiTextFieldEmail.setFocused(true);
+                    if (!inputEmail.isFocused() && !inputPassword.isFocused()) {
+                        inputEmail.setFocused(true);
                     } else {
-                        guiTextFieldEmail.setFocused(!guiTextFieldEmail.isFocused());
-                        guiTextFieldPassword.setFocused(!guiTextFieldPassword.isFocused());
+                        inputEmail.setFocused(!inputEmail.isFocused());
+                        inputPassword.setFocused(!inputPassword.isFocused());
                     }
                     break;
 
                 case 28:
 
-                    if (!message.equals("Press ENTER")) {
-                        break;
+                    if (inputEmail.getText().isEmpty() && inputPassword.getText().isEmpty()) {
+                        return;
                     }
 
                     final YggdrasilAuthenticationService service = new YggdrasilAuthenticationService(Proxy.NO_PROXY, "");
-
                     final YggdrasilUserAuthentication authentication = (YggdrasilUserAuthentication)service.createUserAuthentication(Agent.MINECRAFT);
-                    authentication.setUsername(guiTextFieldEmail.getText());
-                    authentication.setPassword(guiTextFieldPassword.getText());
+                    authentication.setUsername(inputEmail.getText());
+                    authentication.setPassword(inputPassword.getText());
                     try {
                         authentication.logIn();
                     } catch (AuthenticationException e) {
-                        guiTextFieldEmail.setText("");
-                        guiTextFieldEmail.setFocused(false);
-                        guiTextFieldPassword.setText("");
-                        guiTextFieldPassword.setFocused(false);
+                        // Disable
+                        minecraft.displayGuiScreen(null);
+                        toggle();
                         break;
                     }
 
@@ -125,7 +106,7 @@ public class ScreenAccount extends Screen {
                     minecraft.theWorld.sendQuittingDisconnectingPacket();
                     minecraft.loadWorld(null);
                     final boolean flag1 = minecraft.isIntegratedServerRunning();
-                    final boolean flag2 = minecraft.isConnectedToRealms();
+                    final boolean flag2 = minecraft.func_181540_al();
                     if (flag1) {
                         minecraft.displayGuiScreen(new GuiMainMenu());
                     } else if (flag2) {
@@ -136,20 +117,6 @@ public class ScreenAccount extends Screen {
 
                     break;
 
-            }
-
-        }
-
-        private void updateFocus(GuiTextField guiTextField, String defaultText) {
-
-            if (guiTextField.isFocused()) {
-                if (guiTextField.getText().equals(defaultText)) {
-                    guiTextField.setText("");
-                }
-            } else {
-                if (guiTextField.getText().isEmpty()) {
-                    guiTextField.setText(defaultText);
-                }
             }
 
         }

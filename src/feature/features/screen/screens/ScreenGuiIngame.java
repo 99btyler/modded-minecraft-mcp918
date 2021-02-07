@@ -1,5 +1,6 @@
 package mmmcp.feature.features.screen.screens;
 
+import mmmcp.MMMCP;
 import mmmcp.feature.Feature;
 import mmmcp.feature.features.cheat.Cheat;
 import mmmcp.feature.features.screen.Screen;
@@ -17,21 +18,22 @@ import java.util.List;
 
 public class ScreenGuiIngame extends Screen {
 
-    public ScreenGuiIngame(int keybind, boolean enabled) {
+    public ScreenGuiIngame(int keybind) {
 
-        super(keybind, enabled);
+        super(keybind);
 
-        minecraft.ingameGUI = new ActualScreenGuiIngame(minecraft);
+        // Hijack minecraft.ingameGUI
+        minecraft.ingameGUI = new TheScreenGuiIngame(minecraft);
 
     }
 
-    private class ActualScreenGuiIngame extends GuiIngame {
+    private class TheScreenGuiIngame extends GuiIngame {
 
         private int currentX;
         private int currentY;
-        private boolean shouldAlignLeft;
+        private boolean alignLeft;
 
-        public ActualScreenGuiIngame(Minecraft mcIn) {
+        public TheScreenGuiIngame(Minecraft mcIn) {
             super(mcIn);
         }
 
@@ -40,77 +42,79 @@ public class ScreenGuiIngame extends Screen {
 
             super.renderGameOverlay(partialTicks);
 
-            if (!enabled) {
+            // Our stuff begins here
+
+            if (!isEnabled()) {
                 return;
             }
 
-            // STARTING AT TOP LEFT OF SCREEN
+            // START AT TOP LEFT
             currentX = 5;
             currentY = 5;
-            shouldAlignLeft = true;
+            alignLeft = true;
 
-            final String name = tagBD + (minecraft.getMMMCP().getName());
-            doText(name);
+            final String name = MMMCP.getInstance().getName();
+            doBox(name);
 
-            final String xyz = (minecraft.thePlayer.posY > 0 ? tagBD : tagBR) + ((int)minecraft.thePlayer.posX + "x " + (int)minecraft.thePlayer.posY + "y " + (int)minecraft.thePlayer.posZ + "z");
-            doText(xyz);
+            final String xyz = (int)minecraft.thePlayer.posX + "x " + (int)minecraft.thePlayer.posY + "y " + (int)minecraft.thePlayer.posZ + "z";
+            doBox(xyz);
 
-            final String fps = (Minecraft.getDebugFPS() >= 60 ? tagBD : tagBR) + ("FPS: " + Minecraft.getDebugFPS());
-            final String facing = tagBD + (minecraft.thePlayer.getHorizontalFacing().getName().toUpperCase());
-            doSection(2, new String[] {fps, facing});
+            final String fps = "FPS: " + minecraft.getDebugFPS();
+            final String facing = minecraft.thePlayer.getHorizontalFacing().toString().toUpperCase();
+            doBoxes(2, new String[] {fps, facing});
 
-            String time = tagBD + (new SimpleDateFormat("h:mm a (s)").format(new Date()));
-            doText(time);
+            final String time = new SimpleDateFormat("h:mma s").format(new Date());
+            doBox(time);
 
-            // MOVING TO TOP RIGHT OF SCREEN
-            final ScaledResolution scaledResolution = new ScaledResolution(minecraft);
-            currentX = scaledResolution.getScaledWidth() - 5;
+            // MOVE TO TOP RIGHT
+            currentX = new ScaledResolution(minecraft).getScaledWidth() - 5;
             currentY = 5;
-            shouldAlignLeft = false;
+            alignLeft = false;
 
             final List<String> cheatNames = new ArrayList<>();
-            for (Feature feature : minecraft.getMMMCP().getFeatures()) {
+            for (Feature feature : MMMCP.getInstance().getFeatures()) {
                 if (feature instanceof Cheat) {
-                    cheatNames.add((feature.isEnabled() ?  tagBD : tagBDT) + (feature.getName() + (feature.isEnabled() ? (feature.getTag() != null ? (" [" + feature.getTag() + "§r]") : "") : "")));
+                    cheatNames.add(feature.getName() + " " + feature.getTag());
                 }
             }
-            doSection(3, cheatNames.toArray(new String[0]));
+            doBoxes(3, cheatNames.toArray(new String[0]));
 
-            currentY += 13;
+            currentY += 26;
 
             final List<String> potions = new ArrayList<>();
             for (PotionEffect potionEffect : minecraft.thePlayer.getActivePotionEffects()) {
-                final String pName = I18n.format(potionEffect.getPotion().getName());
-                final String pLevel = (potionEffect.getAmplifier() > 0 ? I18n.format("enchantment.level." + (potionEffect.getAmplifier() + 1)) : "");
-                final String pDuration = " | " + Potion.getPotionDurationString(potionEffect, 1.0F);
-                potions.add((potionEffect.getPotion().isBeneficial() ? tagBD : tagBR) + (pName + pLevel + pDuration));
+                final String pName = I18n.format(potionEffect.getEffectName());
+                final String pLevel = (potionEffect.getAmplifier() > 0 ? " " + I18n.format("enchantment.level." + String.valueOf(potionEffect.getAmplifier() + 1)) : "");
+                final String pDuration = Potion.getDurationString(potionEffect);
+                potions.add(pName + pLevel + " - " + pDuration);
             }
-            doSection(1, potions.toArray(new String[0]));
+            doBoxes(1, potions.toArray(new String[0]));
 
         }
 
-        private void doText(String theText) {
+        private void doBox(String text) {
 
-            drawTheText(theText);
-
+            makeBox(text);
             currentY += 13;
 
         }
 
-        private void doSection(int maxPerLine, String... theTexts) {
+        private void doBoxes(int maxPerLine, String[] texts) {
 
-            final int startingCurrentX = currentX;
+            final int startingX = currentX;
 
-            for (int i = 0; i < theTexts.length; i+=maxPerLine) {
+            for (int i = 0; i < texts.length; i+=maxPerLine) {
 
-                if (shouldAlignLeft) {
+                if (alignLeft) {
 
                     for (int ii = 0; ii < maxPerLine; ii++) {
                         final int index = (i + ii);
-                        if (index < theTexts.length) {
-                            final String theText = theTexts[index];
-                            drawTheText(theText);
-                            currentX += (getFontRenderer().getStringWidth(getTextWithoutTag(theText)) + 5);
+                        if (index < texts.length) {
+
+                            final String text = texts[index];
+                            makeBox(text);
+                            currentX += getFontRenderer().getStringWidth(text) + 5;
+
                         }
                     }
 
@@ -118,48 +122,35 @@ public class ScreenGuiIngame extends Screen {
 
                     for (int ii = (maxPerLine - 1); ii >= 0; ii--) {
                         final int index = (i + ii);
-                        if (index < theTexts.length) {
-                            final String theText = theTexts[index];
-                            drawTheText(theText);
-                            currentX -= (getFontRenderer().getStringWidth(getTextWithoutTag(theText)) + 5);
+                        if (index < texts.length) {
+
+                            final String text = texts[index];
+                            makeBox(text);
+                            currentX -= (getFontRenderer().getStringWidth(text) + 5);
+
                         }
                     }
 
                 }
 
-                currentX = startingCurrentX;
+                currentX = startingX;
                 currentY += 13;
 
             }
 
         }
 
-        private void drawTheText(String theText) {
+        private void makeBox(String text) {
 
-            int colorBackground = 0xFFffffff;
-            int colorText = colorTextDefault;
+            if (alignLeft) {
 
-            final String tag = getTagFromText(theText);
-            if (tag.equals(tagBD)) {
-                colorBackground = colorBackgroundDefault;
-            } else if (tag.equals(tagBDT)) {
-                colorBackground = colorBackgroundDefaultTransparent;
-                colorText = colorTextDefaultTransparent;
-            } else if (tag.equals(tagBR)) {
-                colorBackground = colorBackgroundRed;
-            }
-
-            final String textWithoutTag = getTextWithoutTag(theText);
-
-            if (shouldAlignLeft) {
-
-                drawRect(currentX, currentY, currentX + getFontRenderer().getStringWidth(textWithoutTag) + 4, currentY + 12, colorBackground);
-                drawString(getFontRenderer(), textWithoutTag, currentX + 2, currentY + 2, colorText);
+                drawRect(currentX, currentY, currentX + getFontRenderer().getStringWidth(text) + 4, currentY + 12, colorBackground);
+                drawString(getFontRenderer(), text, currentX + 2, currentY + 2, colorText);
 
             } else {
 
-                drawRect(currentX, currentY, currentX - getFontRenderer().getStringWidth(textWithoutTag) - 4, currentY + 12, colorBackground);
-                drawString(getFontRenderer(), textWithoutTag, currentX - getFontRenderer().getStringWidth(textWithoutTag) - 4 + 2, currentY + 2, colorText);
+                drawRect(currentX, currentY, currentX - getFontRenderer().getStringWidth(text) - 4, currentY + 12, colorBackground);
+                drawString(getFontRenderer(), text, currentX - getFontRenderer().getStringWidth(text) - 2, currentY + 2, colorText);
 
             }
 

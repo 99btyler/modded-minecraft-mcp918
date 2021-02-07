@@ -7,38 +7,33 @@ import java.util.List;
 
 public class Jump extends Cheat {
 
-    public Jump(int keybind, boolean enabled) {
-        super(keybind, enabled);
+    public Jump(int keybind) {
+        super(keybind);
     }
 
     @Override
-    protected void setupEventNames(List<String> eventNames) {
+    protected void fillEventNames(List<String> eventNames) {
         eventNames.add("EventLivingUpdate");
     }
 
     @Override
-    protected Event onEvent(Event event) {
+    protected void onDisable() {
 
-        switch (event.getName()) {
-
-            case "EventLivingUpdate":
-
-                if (minecraft.currentScreen == null) {
-                    minecraft.gameSettings.keyBindJump.pressed = true;
-                }
-
-                return null;
-
-            default:
-                return null;
-
-        }
+        minecraft.gameSettings.keyBindJump.pressed = false;
 
     }
 
     @Override
-    protected void onDisable() {
-        minecraft.gameSettings.keyBindJump.pressed = false;
+    protected void onEvent(Event event) {
+
+        if (event.getName().equals("EventLivingUpdate")) {
+
+            if (minecraft.currentScreen == null) {
+                minecraft.gameSettings.keyBindJump.pressed = true;
+            }
+
+        }
+
     }
 
 }

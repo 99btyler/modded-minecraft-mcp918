@@ -1,5 +1,7 @@
 package mmmcp.feature.features.cheat.cheats;
 
+import mmmcp.feature.event.Event;
+import mmmcp.feature.event.events.EventRenderEntityName;
 import mmmcp.feature.features.cheat.Cheat;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -9,33 +11,54 @@ import net.minecraft.scoreboard.Score;
 import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.Scoreboard;
 
+import java.util.List;
+
 public class Nametags extends Cheat {
 
-    public Nametags(int keybind, boolean enabled) {
-        super(keybind, enabled);
+    public Nametags(int keybind) {
+        super(keybind);
     }
 
-    // Each nametag is made of two lines: NAME and SCORE
-    public final void doNametag(EntityPlayer entityPlayer, String entityPlayerName, double x, double y, double z, RenderManager renderManager, FontRenderer fontRenderer) {
+    @Override
+    protected void fillEventNames(List<String> eventNames) {
+        eventNames.add("EventRenderEntityName");
+    }
 
-        final double distance = minecraft.thePlayer.getDistanceToEntity(entityPlayer);
+    @Override
+    protected void onEvent(Event event) {
 
-        // SCORE
-        final Scoreboard scoreboard = entityPlayer.getWorldScoreboard();
-        final ScoreObjective scoreObjective = scoreboard.getObjectiveInDisplaySlot(2);
-        if (scoreObjective != null) {
-            final Score score = scoreboard.getOrCreateScore(entityPlayer.getName(), scoreObjective);
-            renderLine(entityPlayer, (score.getScorePoints() + " " + scoreObjective.getDisplayName()), x, y, z, distance, renderManager, fontRenderer);
-            y += (fontRenderer.FONT_HEIGHT * 1.15F * 0.025F) + (0.04 * distance);
+        if (event.getName().equals("EventRenderEntityName")) {
+
+            final EventRenderEntityName eventRenderEntityName = (EventRenderEntityName)event;
+            eventRenderEntityName.setCanceled(true);
+
+            final RenderManager renderManager = eventRenderEntityName.getRenderManager();
+            final FontRenderer fontRenderer = renderManager.getFontRenderer();
+
+            final EntityPlayer entityPlayer = eventRenderEntityName.getEntityPlayer();
+            final double x = eventRenderEntityName.getX();
+            double y = eventRenderEntityName.getY();
+            final double z = eventRenderEntityName.getZ();
+
+            final double distance = minecraft.thePlayer.getDistanceToEntity(entityPlayer);
+
+            // SCORE
+            final Scoreboard scoreboard = entityPlayer.getWorldScoreboard();
+            final ScoreObjective scoreObjective = scoreboard.getObjectiveInDisplaySlot(2);
+            if (scoreObjective != null) {
+                final Score score = scoreboard.getValueFromObjective(entityPlayer.getName(), scoreObjective);
+                doLine(renderManager, fontRenderer, entityPlayer, (score.getScorePoints() + " " + scoreObjective.getDisplayName()), distance, x, y, z);
+                y += (fontRenderer.FONT_HEIGHT * 1.15F * 0.025F) + (0.04 * distance);
+            }
+
+            // NAME
+            doLine(renderManager, fontRenderer, entityPlayer, (entityPlayer.getDisplayName().getUnformattedText() + "§r | " + (int)distance), distance, x, y, z);
+
         }
 
-        // NAME
-        entityPlayerName += "§r | " + (int)distance;
-        renderLine(entityPlayer, entityPlayerName, x, y, z, distance, renderManager, fontRenderer);
-
     }
 
-    private void renderLine(EntityPlayer entityPlayer, String entityPlayerName, double x, double y, double z, double distance, RenderManager renderManager, FontRenderer fontRenderer) {
+    private void doLine(RenderManager renderManager, FontRenderer fontRenderer, EntityPlayer entityPlayer, String text, double distance, double x, double y, double z) {
 
         GlStateManager.pushMatrix();
 
@@ -49,7 +72,7 @@ public class Nametags extends Cheat {
         GlStateManager.disableDepth();
         GlStateManager.enableBlend();
 
-        fontRenderer.drawString(entityPlayerName, -(fontRenderer.getStringWidth(entityPlayerName) / 2), 0, -1);
+        fontRenderer.drawString(text, -(fontRenderer.getStringWidth(text) / 2), 0, -1);
 
         GlStateManager.disableBlend();
         GlStateManager.enableDepth();

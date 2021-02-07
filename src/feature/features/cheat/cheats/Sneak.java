@@ -7,36 +7,31 @@ import java.util.List;
 
 public class Sneak extends Cheat {
 
-    public Sneak(int keybind, boolean enabled) {
-        super(keybind, enabled);
+    public Sneak(int keybind) {
+        super(keybind);
     }
 
     @Override
-    protected void setupEventNames(List<String> eventNames) {
+    protected void fillEventNames(List<String> eventNames) {
         eventNames.add("EventLivingUpdate");
     }
 
     @Override
-    protected Event onEvent(Event event) {
+    protected void onDisable() {
 
-        switch (event.getName()) {
-
-            case "EventLivingUpdate":
-
-                minecraft.gameSettings.keyBindSneak.pressed = true;
-
-                return null;
-
-            default:
-                return null;
-
-        }
+        minecraft.gameSettings.keyBindSneak.pressed = false;
 
     }
 
     @Override
-    protected void onDisable() {
-        minecraft.gameSettings.keyBindSneak.pressed = false;
+    protected void onEvent(Event event) {
+
+        if (event.getName().equals("EventLivingUpdate")) {
+
+            minecraft.gameSettings.keyBindSneak.pressed = true;
+
+        }
+
     }
 
 }

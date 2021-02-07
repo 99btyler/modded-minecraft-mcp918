@@ -8,43 +8,30 @@ import java.util.List;
 
 public class Triggerbot extends Cheat {
 
-    private final Timer timer;
+    private final Timer timer = new Timer(125, 200);
 
-    public Triggerbot(int keybind, boolean enabled) {
-
-        super(keybind, enabled);
-
-        // 125-200 ms delay
-        timer = new Timer(125, 200);
-
+    public Triggerbot(int keybind) {
+        super(keybind);
     }
 
     @Override
-    protected void setupEventNames(List<String> eventNames) {
+    protected void fillEventNames(List<String> eventNames) {
         eventNames.add("EventLivingUpdate");
     }
 
     @Override
-    protected Event onEvent(Event event) {
+    protected void onEvent(Event event) {
 
-        switch (event.getName()) {
+        if (event.getName().equals("EventLivingUpdate")) {
 
-            case "EventLivingUpdate":
+            if (minecraft.currentScreen != null) {
+                toggle();
+                return;
+            }
 
-                // Automatically stop & disable self if any screen opens (chest, chat, inventory, etc)
-                if (minecraft.currentScreen != null) {
-                    tryToggle(keybind);
-                    return null;
-                }
-
-                if (timer.hasReached()) {
-                    minecraft.clickMouse();
-                }
-
-                return null;
-
-            default:
-                return null;
+            if (timer.hasReached()) {
+                minecraft.clickMouse();
+            }
 
         }
 

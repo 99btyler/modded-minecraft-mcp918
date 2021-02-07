@@ -1,16 +1,17 @@
 package mmmcp.feature.event.events;
 
+import mmmcp.feature.event.Cancelable;
 import mmmcp.feature.event.Event;
 import net.minecraft.network.Packet;
 
-public class EventSendPacket extends Event {
+public class EventSendPacket extends Event implements Cancelable {
 
     private Packet packet;
+
     private boolean canceled;
 
     public EventSendPacket(Packet packet) {
         this.packet = packet;
-        canceled = false;
     }
 
     public final Packet getPacket() {
@@ -21,11 +22,13 @@ public class EventSendPacket extends Event {
         this.packet = packet;
     }
 
-    public final boolean isCanceled() {
+    @Override
+    public boolean isCanceled() {
         return canceled;
     }
 
-    public final void setCanceled(boolean canceled) {
+    @Override
+    public void setCanceled(boolean canceled) {
         this.canceled = canceled;
     }
 

@@ -7,77 +7,65 @@ import java.util.List;
 
 public class Hold extends Cheat {
 
-    private int slotToHold;
-    private boolean stoppedHolding;
+    private int slotToHold = -1;
+    private boolean stoppedHolding = true;
 
-    public Hold(int keybind, boolean enabled) {
+    public Hold(int keybind) {
+        super(keybind);
+    }
 
-        super(keybind, enabled);
+    @Override
+    protected void fillEventNames(List<String> eventNames) {
+        eventNames.add("EventClickLeft");
+        eventNames.add("EventClickRight");
+        eventNames.add("EventLivingUpdate");
+    }
+
+    @Override
+    protected void onDisable() {
 
         slotToHold = -1;
-        stoppedHolding = true;
-        // Because stoppedHolding is true, the first assumption will be to start holding
+        minecraft.gameSettings.keyBindUseItem.pressed = false;
 
     }
 
     @Override
-    protected void setupEventNames(List<String> eventNames) {
-        eventNames.add("EventLivingUpdate");
-        eventNames.add("EventRightClick");
-    }
-
-    @Override
-    protected Event onEvent(Event event) {
+    protected void onEvent(Event event) {
 
         switch (event.getName()) {
 
-            case "EventLivingUpdate":
+            case "EventClickLeft":
+                toggle();
+                break;
 
-                if (minecraft.thePlayer.inventory.currentItem == slotToHold) {
-
-                    // Start holding
-                    minecraft.gameSettings.keyBindUseItem.pressed = true;
-                    stoppedHolding = false;
-
-                } else {
-
-                    // Make sure we haven't already stopped holding
-                    if (!stoppedHolding) {
-
-                        // Stop holding
-                        minecraft.gameSettings.keyBindUseItem.pressed = false;
-                        stoppedHolding = true;
-
-                    }
-
-                }
-
-                return null;
-
-            case "EventRightClick":
+            case "EventClickRight":
 
                 if (slotToHold == -1) {
                     slotToHold = minecraft.thePlayer.inventory.currentItem;
                 }
 
-                return null;
+                break;
 
-            default:
-                return null;
+            case "EventLivingUpdate":
+
+                if (minecraft.thePlayer.inventory.currentItem == slotToHold) {
+
+                    minecraft.gameSettings.keyBindUseItem.pressed = true;
+                    stoppedHolding = false;
+
+                } else {
+
+                    if (!stoppedHolding) {
+                        minecraft.gameSettings.keyBindUseItem.pressed = false;
+                        stoppedHolding = true;
+                    }
+
+                }
+
+                break;
 
         }
 
-    }
-
-    @Override
-    protected void onDisable() {
-        slotToHold = -1;
-        minecraft.gameSettings.keyBindUseItem.pressed = false;
-    }
-
-    @Override
-    public String getTag() {
-        return (minecraft.thePlayer.inventory.currentItem == slotToHold ? "§2" : "§c") + (slotToHold + 1);
     }
 
 }

@@ -2,38 +2,33 @@ package mmmcp.feature;
 
 import mmmcp.feature.event.Event;
 import net.minecraft.client.Minecraft;
+import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Feature {
 
-    protected final String name;
+    private final String name = getClass().getSimpleName();
+    private boolean enabled = false;
+    private final int keybind;
 
-    protected int keybind;
-    protected boolean enabled;
+    private final List<String> eventNames = new ArrayList<>();
 
-    // Events the feature is listening for. Identified by name for simplicity.
-    // TODO: less hard coding?
-    private List<String> eventNames;
-
+    // For the Feature subclasses
     protected final static Minecraft minecraft = Minecraft.getMinecraft();
 
-    public Feature(int keybind, boolean enabled) {
-
-        // Automatically set the feature's name to whatever its class is named
-        name = getClass().getSimpleName();
-
+    public Feature(int keybind) {
         this.keybind = keybind;
-        this.enabled = enabled;
-
-        eventNames = new ArrayList<>();
-        setupEventNames(eventNames);
-
+        fillEventNames(eventNames);
     }
 
     public final String getName() {
         return name;
+    }
+
+    public String getTag() {
+        return (enabled ? "§a" : "") + Keyboard.getKeyName(keybind).toLowerCase();
     }
 
     public final boolean isEnabled() {
@@ -44,11 +39,7 @@ public abstract class Feature {
         return keybind;
     }
 
-    public final void tryToggle(int keybind) {
-
-        if (this.keybind != keybind) {
-            return;
-        }
+    public final void toggle() {
 
         enabled = !enabled;
 
@@ -68,24 +59,18 @@ public abstract class Feature {
         System.out.println(name + ".onDisable() wasn't overridden");
     }
 
-    protected void setupEventNames(List<String> eventNames) {
-        System.out.println(name + ".setupEventNames() wasn't overridden");
+    protected void fillEventNames(List<String> eventNames) {
+        System.out.println(name + ".addEventNames() wasn't overridden");
     }
 
-    public final Event tryOnEvent(Event event) {
+    public final void tryOnEvent(Event event) {
         if (enabled && eventNames.contains(event.getName())) {
-            return onEvent(event);
+            onEvent(event);
         }
-        return null;
     }
 
-    protected Event onEvent(Event event) {
+    protected void onEvent(Event event) {
         System.out.println(name + ".onEvent() wasn't overridden");
-        return null;
-    }
-
-    public String getTag() {
-        return null;
     }
 
 }

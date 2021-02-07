@@ -7,37 +7,32 @@ import java.util.List;
 
 public class Sprint extends Cheat {
 
-    public Sprint(int keybind, boolean enabled) {
-        super(keybind, enabled);
+    public Sprint(int keybind) {
+        super(keybind);
     }
 
     @Override
-    protected void setupEventNames(List<String> eventNames) {
+    protected void fillEventNames(List<String> eventNames) {
         eventNames.add("EventLivingUpdate");
     }
 
     @Override
-    protected Event onEvent(Event event) {
+    protected void onDisable() {
 
-        switch (event.getName()) {
-
-            case "EventLivingUpdate":
-
-                minecraft.gameSettings.keyBindSprint.pressed = true;
-
-                return null;
-
-            default:
-                return null;
-
-        }
+        minecraft.gameSettings.keyBindSprint.pressed = false;
+        minecraft.thePlayer.setSprinting(false);
 
     }
 
     @Override
-    protected void onDisable() {
-        minecraft.gameSettings.keyBindSprint.pressed = false;
-        minecraft.thePlayer.setSprinting(false);
+    protected void onEvent(Event event) {
+
+        if (event.getName().equals("EventLivingUpdate")) {
+
+            minecraft.gameSettings.keyBindSprint.pressed = true;
+
+        }
+
     }
 
 }

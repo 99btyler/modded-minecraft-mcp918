@@ -1,6 +1,7 @@
 package mmmcp;
 
 import mmmcp.feature.Feature;
+import mmmcp.feature.event.Event;
 import mmmcp.feature.features.cheat.cheats.*;
 import mmmcp.feature.features.screen.screens.ScreenAccount;
 import mmmcp.feature.features.screen.screens.ScreenGuiIngame;
@@ -8,37 +9,32 @@ import org.lwjgl.input.Keyboard;
 
 public class MMMCP {
 
-    private String name;
+    private final static MMMCP instance = new MMMCP();
 
-    private Feature[] features;
+    private final String name = "modded-minecraft-mcp918";
 
-    public MMMCP() {
+    private final Feature[] features = {
 
-        // modded-minecraft-[mcp version]
-        // mcp928 is for 1.9.4
-        name = "modded-minecraft-mcp928";
+            // Cheats
+            new Triggerbot(Keyboard.KEY_R),
+            new Hold(Keyboard.KEY_M),
+            new InvMove(Keyboard.KEY_I),
+            new Nametags(Keyboard.KEY_O),
+            new Tracers(Keyboard.KEY_P),
+            new Jump(Keyboard.KEY_J),
+            new Walk(Keyboard.KEY_K),
+            new Freecam(Keyboard.KEY_V),
+            new Sneak(Keyboard.KEY_Z),
+            new Sprint(Keyboard.KEY_C),
 
-        features = new Feature[] {
+            // Screens
+            new ScreenGuiIngame(Keyboard.KEY_RSHIFT),
+            new ScreenAccount(Keyboard.KEY_RBRACKET)
 
-                // Cheats
-                new Triggerbot(Keyboard.KEY_R, false),
-                new Hold(Keyboard.KEY_N, false),
-                new Nametags(Keyboard.KEY_I, false),
-                new Outline(Keyboard.KEY_O, false),
-                new Tracers(Keyboard.KEY_P, false),
-                new Jump(Keyboard.KEY_J, false),
-                new Walk(Keyboard.KEY_K, false),
-                new InvMove(Keyboard.KEY_L, false),
-                new Freecam(Keyboard.KEY_V, false),
-                new Sneak(Keyboard.KEY_Z, false),
-                new Sprint(Keyboard.KEY_C, false),
+    };
 
-                // Screens
-                new ScreenGuiIngame(Keyboard.KEY_RSHIFT, true),
-                new ScreenAccount(Keyboard.KEY_RBRACKET, false)
-
-        };
-
+    public final static MMMCP getInstance() {
+        return instance;
     }
 
     public final String getName() {
@@ -58,12 +54,18 @@ public class MMMCP {
         return null;
     }
 
-    public final void tryToggleFeatures(boolean desiredEnabled, String...featureNames) {
+    public final void ableFeatures(boolean desiredEnabled, String[] featureNames) {
         for (String featureName : featureNames) {
             final Feature feature = getFeature(featureName);
             if (feature.isEnabled() != desiredEnabled) {
-                feature.tryToggle(feature.getKeybind());
+                feature.toggle();
             }
+        }
+    }
+
+    public final void alertFeatures(Event event) {
+        for (Feature feature : features) {
+            feature.tryOnEvent(event);
         }
     }
 
