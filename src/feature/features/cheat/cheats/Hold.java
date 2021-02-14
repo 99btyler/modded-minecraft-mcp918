@@ -68,4 +68,9 @@ public class Hold extends Cheat {
 
     }
 
+    @Override
+    public String getTag() {
+        return super.getTag() + (isEnabled() && slotToHold != -1 ? "§r " + (minecraft.thePlayer.inventory.currentItem == slotToHold ? "§a" : "§c") + (slotToHold + 1) : "");
+    }
+
 }
