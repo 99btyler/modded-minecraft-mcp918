@@ -35,7 +35,8 @@ public class Tracers extends Cheat {
                     continue;
                 }
 
-                GL11.glColor4d(1, 1, 1, .25F);
+                final int[] rgb = getRGBOfName(entityPlayer.getName(), entityPlayer.getDisplayName().getFormattedText());
+                GL11.glColor4d(rgb[0], rgb[1], rgb[2], .25F);
                 GL11.glLineWidth(.25F);
 
                 GL11.glBegin(GL11.GL_LINES);
@@ -54,6 +55,34 @@ public class Tracers extends Cheat {
             GL11.glEnable(GL11.GL_TEXTURE_2D);
 
         }
+
+    }
+
+    private int[] getRGBOfName(String actualName, String formattedName) {
+
+        int[] rgb = new int[] {1, 1, 1};
+
+        final String preName = formattedName.split(actualName)[0];
+
+        for (int i = preName.length() - 1; i >= 0; i--) {
+            if (String.valueOf(preName.charAt(i)).equals("§")) {
+
+                final String colorCode = "§" + preName.charAt(i + 1);
+
+                if (colorCode.equals("§4") || colorCode.equals("§c")) {
+                    rgb = new int[] {1, 0, 0};
+                } else if (colorCode.equals("§2") || colorCode.equals("§a")) {
+                    rgb = new int[] {0, 1, 0};
+                } else if (colorCode.equals("§1") || colorCode.equals("§3") || colorCode.equals("§9") || colorCode.equals("§b")) {
+                    rgb = new int[] {0, 0, 1};
+                } else if (colorCode.equals("§6") || colorCode.equals("§e") || colorCode.equals("§g")) {
+                    rgb = new int[] {1, 1, 0};
+                }
+
+            }
+        }
+
+        return rgb;
 
     }
 
