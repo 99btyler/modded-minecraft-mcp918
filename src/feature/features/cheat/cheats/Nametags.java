@@ -52,7 +52,7 @@ public class Nametags extends Cheat {
             }
 
             // NAME
-            doLine(renderManager, fontRenderer, entityPlayer, (entityPlayer.getDisplayName().getUnformattedText() + "§r | " + (int)distance), distance, x, y, z);
+            doLine(renderManager, fontRenderer, entityPlayer, (entityPlayer.getDisplayName().getFormattedText() + "§r | " + (int)distance), distance, x, y, z);
 
         }
 
