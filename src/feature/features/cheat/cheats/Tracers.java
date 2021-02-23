@@ -36,8 +36,8 @@ public class Tracers extends Cheat {
                 }
 
                 final int[] rgb = getRGBOfName(entityPlayer.getName(), entityPlayer.getDisplayName().getFormattedText());
-                GL11.glColor4d(rgb[0], rgb[1], rgb[2], .25F);
-                GL11.glLineWidth(.25F);
+                GL11.glColor4d(rgb[0], rgb[1], rgb[2], .60F - (.01F * minecraft.thePlayer.getDistanceToEntity(entityPlayer)));
+                GL11.glLineWidth(.60F);
 
                 GL11.glBegin(GL11.GL_LINES);
 
