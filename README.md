@@ -1,4 +1,6 @@
-# modded-minecraft-mcp
+# modded-minecraft-mcp918
+![modded-minecraft-mcp918 gif](https://i.imgur.com/o40P2kX.gif)
+
 Have a modded version of Minecraft 1.8.8 using mcp918
 
 # Using this yourself
