@@ -1,20 +1,22 @@
 # modded-minecraft-mcp918
 ![modded-minecraft-mcp918 gif](https://i.imgur.com/o40P2kX.gif)
 
-Have a modded version of Minecraft 1.8.8 using mcp918
-
-# Using this yourself
-1. Own Minecraft, run Minecraft 1.8.8 at least once
-2. Download this repository
-3. Download mcp918 folder from http://www.modcoderpack.com/
-4. Put the mcp918 folder inside this repository's folder
-5. Using terminal, navigate to the mcp918 folder. Then, run decompile.sh or decompile.bat
-6. Copy the src folder from this repository and paste it in mcp918/src/minecraft folder. Then, rename the copied src to mmmcp
-7. Using a Java IDE, open mcp918/eclipse
-8. Because mcp918 allows us to change Minecraft code, we will. Manually add this required code:
+# Getting Started
+Get this project set up locally
+### Prerequisites
+* Own a copy of Minecraft
+* Have a 1.8.8 version folder by launching Minecraft 1.8.8 at least once
+### Setting up
+* Clone this repository
+* Download mcp918.zip from http://www.modcoderpack.com/
+* Unzip it, then move it to this repository's local folder (so the folder contains: src, readme, and mcp918)
+* Using terminal, navigate to the mcp918 folder. Then, run decompile.sh or decompile.bat
+* From this repository's local folder, copy the src folder. Navigate to mcp918/src/minecraft and paste it there. Finally, rename it to mmmcp (so the folder contains: Start.java, net, and mmmcp)
+* Using a Java IDE, open mcp918/eclipse
+* Because mcp918 allows me to change Minecraft code, I did. However, I don't include any minecraft code files in this repository so you must manually add this required code to the files:
 
 ```java
-// ----> C03PacketPlayer.java
+// ----> inside C03PacketPlayer.java
 
 // Change protected to public:
 public double x;
@@ -22,7 +24,7 @@ public double y;
 public double z;
 ```
 ```java
-// ----> EntityPlayerSP.java
+// ----> inside EntityPlayerSP.java
 
 // At start of the attackEntityFrom() method:
 if (source != DamageSource.inWall) {
@@ -37,7 +39,7 @@ final EventLivingUpdate eventLivingUpdate = new EventLivingUpdate();
 MMMCP.getInstance().alertFeatures(eventLivingUpdate);
 ```
 ```java
-// ----> EntityRenderer.java
+// ----> inside EntityRenderer.java
 
 // In the setupCameraTransform() method after 'if (this.mc.gameSettings.viewBobbing)':
 if (!MMMCP.getInstance().getFeature("Tracers").isEnabled()) {
@@ -49,13 +51,13 @@ final EventRenderHand eventRenderHand = new EventRenderHand();
 MMMCP.getInstance().alertFeatures(eventRenderHand);
 ```
 ```java
-// ----> KeyBinding.java
+// ----> inside KeyBinding.java
 
 // Change private to public:
 public boolean pressed;
 ```
 ```java
-// ----> Minecraft.java
+// ----> inside Minecraft.java
 
 // Change private final to public:
 public Session session;
@@ -82,7 +84,7 @@ final EventClickRight eventClickRight = new EventClickRight();
 MMMCP.getInstance().alertFeatures(eventRightClick);
 ```
 ```java
-// ----> NetHandlerPlayClient.java
+// ----> inside NetHandlerPlayClient.java
 
 // At start of the addToSendQueue() method:
 final EventSendPacket eventSendPacket = new EventSendPacket(packetIn);
@@ -94,7 +96,7 @@ if (eventSendPacket.isCanceled()) {
 }
 ```
 ```java
-// ----> RenderManager.java
+// ----> inside RenderManager.java
 
 // Change private to public:
 public double renderPosX;
@@ -102,7 +104,7 @@ public double renderPosY;
 public double renderPosZ;
 ```
 ```java
-// ----> RenderPlayer.java
+// ----> inside RenderPlayer.java
 
 // At start of the renderOffsetLivingLabel() method:
 final EventRenderEntityName eventRenderEntityName = new EventRenderEntityName(renderManager, entityIn, x, y, z);
