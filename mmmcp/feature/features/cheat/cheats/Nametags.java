@@ -20,14 +20,14 @@ public class Nametags extends Cheat {
     }
 
     @Override
-    protected void fillEventNames(List<String> eventNames) {
-        eventNames.add("EventRenderEntityName");
+    protected void fillEventTypes(List<String> eventTypes) {
+        eventTypes.add(Event.renderEntityName);
     }
 
     @Override
     protected void onEvent(Event event) {
 
-        if (event.getName().equals("EventRenderEntityName")) {
+        if (event.getType().equals(Event.renderEntityName)) {
 
             final EventRenderEntityName eventRenderEntityName = (EventRenderEntityName)event;
             eventRenderEntityName.setCanceled(true);

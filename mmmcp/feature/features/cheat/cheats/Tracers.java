@@ -15,14 +15,14 @@ public class Tracers extends Cheat {
     }
 
     @Override
-    protected void fillEventNames(List<String> eventNames) {
-        eventNames.add("EventRenderHand");
+    protected void fillEventTypes(List<String> eventTypes) {
+        eventTypes.add(Event.renderHand);
     }
 
     @Override
     protected void onEvent(Event event) {
 
-        if (event.getName().equals("EventRenderHand")) {
+        if (event.getType().equals(Event.renderHand)) {
 
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glDisable(GL11.GL_TEXTURE_2D);

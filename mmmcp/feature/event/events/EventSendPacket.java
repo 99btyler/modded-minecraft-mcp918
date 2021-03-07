@@ -11,7 +11,11 @@ public class EventSendPacket extends Event implements Cancelable {
     private boolean canceled;
 
     public EventSendPacket(Packet packet) {
+
+        super(sendPacket);
+
         this.packet = packet;
+
     }
 
     public final Packet getPacket() {

@@ -4,4 +4,8 @@ import mmmcp.feature.event.Event;
 
 public class EventClickLeft extends Event {
 
+    public EventClickLeft() {
+        super(clickLeft);
+    }
+
 }

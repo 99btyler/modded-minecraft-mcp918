@@ -13,7 +13,7 @@ public abstract class Feature {
     private boolean enabled = false;
     private final int keybind;
 
-    private final List<String> eventNames = new ArrayList<>();
+    private final List<String> eventTypes = new ArrayList<>();
 
     // For the Feature subclasses
     protected final static Minecraft minecraft = Minecraft.getMinecraft();
@@ -22,7 +22,7 @@ public abstract class Feature {
 
         this.keybind = keybind;
 
-        fillEventNames(eventNames);
+        fillEventTypes(eventTypes);
 
     }
 
@@ -62,12 +62,12 @@ public abstract class Feature {
         System.out.println(name + ".onDisable() wasn't overridden");
     }
 
-    protected void fillEventNames(List<String> eventNames) {
-        System.out.println(name + ".addEventNames() wasn't overridden");
+    protected void fillEventTypes(List<String> eventTypes) {
+        System.out.println(name + ".fillEventTypes() wasn't overridden");
     }
 
     public final void tryOnEvent(Event event) {
-        if (enabled && eventNames.contains(event.getName())) {
+        if (enabled && eventTypes.contains(event.getType())) {
             onEvent(event);
         }
     }

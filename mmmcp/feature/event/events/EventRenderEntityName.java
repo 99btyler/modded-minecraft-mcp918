@@ -19,6 +19,8 @@ public class EventRenderEntityName extends Event implements Cancelable {
 
     public EventRenderEntityName(RenderManager renderManager, EntityPlayer entityPlayer, double x, double y, double z) {
 
+        super(renderEntityName);
+
         this.renderManager = renderManager;
 
         this.entityPlayer = entityPlayer;

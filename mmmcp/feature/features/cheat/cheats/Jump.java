@@ -12,8 +12,8 @@ public class Jump extends Cheat {
     }
 
     @Override
-    protected void fillEventNames(List<String> eventNames) {
-        eventNames.add("EventLivingUpdate");
+    protected void fillEventTypes(List<String> eventTypes) {
+        eventTypes.add(Event.livingUpdate);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class Jump extends Cheat {
     @Override
     protected void onEvent(Event event) {
 
-        if (event.getName().equals("EventLivingUpdate")) {
+        if (event.getType().equals(Event.livingUpdate)) {
 
             if (minecraft.currentScreen == null) {
                 minecraft.gameSettings.keyBindJump.pressed = true;

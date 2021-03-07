@@ -15,10 +15,10 @@ public class Hold extends Cheat {
     }
 
     @Override
-    protected void fillEventNames(List<String> eventNames) {
-        eventNames.add("EventClickLeft");
-        eventNames.add("EventClickRight");
-        eventNames.add("EventLivingUpdate");
+    protected void fillEventTypes(List<String> eventTypes) {
+        eventTypes.add(Event.clickLeft);
+        eventTypes.add(Event.clickRight);
+        eventTypes.add(Event.livingUpdate);
     }
 
     @Override
@@ -32,13 +32,13 @@ public class Hold extends Cheat {
     @Override
     protected void onEvent(Event event) {
 
-        switch (event.getName()) {
+        switch (event.getType()) {
 
-            case "EventClickLeft":
+            case Event.clickLeft:
                 toggle();
                 break;
 
-            case "EventClickRight":
+            case Event.clickRight:
 
                 if (slotToHold == -1) {
                     slotToHold = minecraft.thePlayer.inventory.currentItem;
@@ -46,7 +46,7 @@ public class Hold extends Cheat {
 
                 break;
 
-            case "EventLivingUpdate":
+            case Event.livingUpdate:
 
                 if (minecraft.thePlayer.inventory.currentItem == slotToHold) {
 

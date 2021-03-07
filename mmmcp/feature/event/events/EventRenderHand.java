@@ -4,4 +4,8 @@ import mmmcp.feature.event.Event;
 
 public class EventRenderHand extends Event {
 
+    public EventRenderHand() {
+        super(renderHand);
+    }
+
 }

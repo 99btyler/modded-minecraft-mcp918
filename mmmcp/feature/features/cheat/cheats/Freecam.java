@@ -27,9 +27,9 @@ public class Freecam extends Cheat {
     }
 
     @Override
-    protected void fillEventNames(List<String> eventNames) {
-        eventNames.add("EventLivingUpdate");
-        eventNames.add("EventSendPacket");
+    protected void fillEventTypes(List<String> eventTypes) {
+        eventTypes.add(Event.livingUpdate);
+        eventTypes.add(Event.sendPacket);
     }
 
     @Override
@@ -97,9 +97,9 @@ public class Freecam extends Cheat {
     @Override
     protected void onEvent(Event event) {
 
-        switch (event.getName()) {
+        switch (event.getType()) {
 
-            case "EventLivingUpdate":
+            case Event.livingUpdate:
 
                 if (minecraft.currentScreen != null && !(minecraft.currentScreen instanceof GuiChat)) {
                     toggle();
@@ -128,7 +128,7 @@ public class Freecam extends Cheat {
 
                 break;
 
-            case "EventSendPacket":
+            case Event.sendPacket:
 
                 final EventSendPacket eventSendPacket = (EventSendPacket)event;
                 final Packet packet = eventSendPacket.getPacket();
