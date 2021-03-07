@@ -31,20 +31,23 @@ public class ScreenAccount extends Screen {
 
     private class TheScreenAccount extends GuiScreen {
 
+        private final int gtfWidth = 200;
+        private final int gtfHeight = 20;
+
         private GuiTextField inputEmail;
         private GuiTextField inputPassword;
 
         @Override
         public void initGui() {
-            inputEmail = new GuiTextField(0, fontRendererObj, (width / 2) - 90, (height / 2) - 20, 180, 20);
-            inputPassword = new GuiTextField(0, fontRendererObj, (width / 2) - 90, (height / 2), 180, 20);
+            inputEmail = new GuiTextField(0, fontRendererObj, (width / 2) - (gtfWidth / 2), (height / 2) - gtfHeight, gtfWidth, gtfHeight);
+            inputPassword = new GuiTextField(0, fontRendererObj, (width / 2) - (gtfWidth / 2), (height / 2), gtfWidth, gtfHeight);
         }
 
         @Override
         public void drawScreen(int mouseX, int mouseY, float partialTicks) {
             inputEmail.drawTextBox();
             inputPassword.drawTextBox();
-            drawRect((width / 2) - 90, (height / 2), ((width / 2) - 90) + 180, (height / 2) + 20, colorBackground);
+            drawRect((width / 2) - (gtfWidth / 2), (height / 2), ((width / 2) - (gtfWidth / 2)) + gtfWidth, (height / 2) + gtfHeight, colorBackground);
         }
 
         @Override
