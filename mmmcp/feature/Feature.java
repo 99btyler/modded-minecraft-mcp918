@@ -19,8 +19,11 @@ public abstract class Feature {
     protected final static Minecraft minecraft = Minecraft.getMinecraft();
 
     public Feature(int keybind) {
+
         this.keybind = keybind;
+
         fillEventNames(eventNames);
+
     }
 
     public final String getName() {
