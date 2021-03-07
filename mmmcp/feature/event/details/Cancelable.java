@@ -1,4 +1,4 @@
-package mmmcp.feature.event;
+package mmmcp.feature.event.details;
 
 public interface Cancelable {
 

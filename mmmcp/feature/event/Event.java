@@ -1,24 +1,17 @@
 package mmmcp.feature.event;
 
+import mmmcp.feature.event.details.EventType;
+
 public abstract class Event {
 
-    // All types
-    public static final String clickLeft = "EventClickLeft";
-    public static final String clickRight = "EventClickRight";
-    public static final String livingUpdate = "EventLivingUpdate";
-    public static final String renderEntityName = "EventRenderEntityName";
-    public static final String renderHand = "EventRenderHand";
-    public static final String sendPacket = "EventSendPacket";
+    private final EventType eventType;
 
-    // The event's type (set in subclass)
-    private String type;
-
-    public Event(String type) {
-        this.type = type;
+    public Event(EventType eventType) {
+        this.eventType = eventType;
     }
 
-    public final String getType() {
-        return type;
+    public final EventType getEventType() {
+        return eventType;
     }
 
 }

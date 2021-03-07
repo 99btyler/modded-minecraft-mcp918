@@ -1,6 +1,7 @@
 package mmmcp.feature;
 
 import mmmcp.feature.event.Event;
+import mmmcp.feature.event.details.EventType;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 
@@ -13,7 +14,7 @@ public abstract class Feature {
     private boolean enabled = false;
     private final int keybind;
 
-    private final List<String> eventTypes = new ArrayList<>();
+    private final List<EventType> eventTypes = new ArrayList<>();
 
     // For the Feature subclasses
     protected final static Minecraft minecraft = Minecraft.getMinecraft();
@@ -62,12 +63,12 @@ public abstract class Feature {
         System.out.println(name + ".onDisable() wasn't overridden");
     }
 
-    protected void fillEventTypes(List<String> eventTypes) {
+    protected void fillEventTypes(List<EventType> eventTypes) {
         System.out.println(name + ".fillEventTypes() wasn't overridden");
     }
 
     public final void tryOnEvent(Event event) {
-        if (enabled && eventTypes.contains(event.getType())) {
+        if (enabled && eventTypes.contains(event.getEventType())) {
             onEvent(event);
         }
     }

@@ -2,6 +2,7 @@ package mmmcp.feature.features.cheat.cheats;
 
 import mmmcp.MMMCP;
 import mmmcp.feature.event.Event;
+import mmmcp.feature.event.details.EventType;
 import mmmcp.feature.event.events.EventSendPacket;
 import mmmcp.feature.features.cheat.Cheat;
 import mmmcp.util.Timer;
@@ -27,9 +28,9 @@ public class Freecam extends Cheat {
     }
 
     @Override
-    protected void fillEventTypes(List<String> eventTypes) {
-        eventTypes.add(Event.livingUpdate);
-        eventTypes.add(Event.sendPacket);
+    protected void fillEventTypes(List<EventType> eventTypes) {
+        eventTypes.add(EventType.LIVING_UPDATE);
+        eventTypes.add(EventType.SEND_PACKET);
     }
 
     @Override
@@ -97,9 +98,9 @@ public class Freecam extends Cheat {
     @Override
     protected void onEvent(Event event) {
 
-        switch (event.getType()) {
+        switch (event.getEventType()) {
 
-            case Event.livingUpdate:
+            case LIVING_UPDATE:
 
                 if (minecraft.currentScreen != null && !(minecraft.currentScreen instanceof GuiChat)) {
                     toggle();
@@ -128,7 +129,7 @@ public class Freecam extends Cheat {
 
                 break;
 
-            case Event.sendPacket:
+            case SEND_PACKET:
 
                 final EventSendPacket eventSendPacket = (EventSendPacket)event;
                 final Packet packet = eventSendPacket.getPacket();

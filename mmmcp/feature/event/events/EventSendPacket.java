@@ -1,7 +1,8 @@
 package mmmcp.feature.event.events;
 
-import mmmcp.feature.event.Cancelable;
 import mmmcp.feature.event.Event;
+import mmmcp.feature.event.details.Cancelable;
+import mmmcp.feature.event.details.EventType;
 import net.minecraft.network.Packet;
 
 public class EventSendPacket extends Event implements Cancelable {
@@ -12,7 +13,7 @@ public class EventSendPacket extends Event implements Cancelable {
 
     public EventSendPacket(Packet packet) {
 
-        super(sendPacket);
+        super(EventType.SEND_PACKET);
 
         this.packet = packet;
 

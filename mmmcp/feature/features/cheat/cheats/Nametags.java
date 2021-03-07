@@ -1,6 +1,7 @@
 package mmmcp.feature.features.cheat.cheats;
 
 import mmmcp.feature.event.Event;
+import mmmcp.feature.event.details.EventType;
 import mmmcp.feature.event.events.EventRenderEntityName;
 import mmmcp.feature.features.cheat.Cheat;
 import net.minecraft.client.gui.FontRenderer;
@@ -20,14 +21,14 @@ public class Nametags extends Cheat {
     }
 
     @Override
-    protected void fillEventTypes(List<String> eventTypes) {
-        eventTypes.add(Event.renderEntityName);
+    protected void fillEventTypes(List<EventType> eventTypes) {
+        eventTypes.add(EventType.RENDER_ENTITY_NAME);
     }
 
     @Override
     protected void onEvent(Event event) {
 
-        if (event.getType().equals(Event.renderEntityName)) {
+        if (event.getEventType() == EventType.RENDER_ENTITY_NAME) {
 
             final EventRenderEntityName eventRenderEntityName = (EventRenderEntityName)event;
             eventRenderEntityName.setCanceled(true);

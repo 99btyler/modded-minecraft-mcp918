@@ -1,6 +1,7 @@
 package mmmcp.feature.features.cheat.cheats;
 
 import mmmcp.feature.event.Event;
+import mmmcp.feature.event.details.EventType;
 import mmmcp.feature.features.cheat.Cheat;
 import mmmcp.util.Timer;
 
@@ -15,14 +16,14 @@ public class Triggerbot extends Cheat {
     }
 
     @Override
-    protected void fillEventTypes(List<String> eventTypes) {
-        eventTypes.add(Event.livingUpdate);
+    protected void fillEventTypes(List<EventType> eventTypes) {
+        eventTypes.add(EventType.LIVING_UPDATE);
     }
 
     @Override
     protected void onEvent(Event event) {
 
-        if (event.getType().equals(Event.livingUpdate)) {
+        if (event.getEventType() == EventType.LIVING_UPDATE) {
 
             if (minecraft.currentScreen != null) {
                 toggle();

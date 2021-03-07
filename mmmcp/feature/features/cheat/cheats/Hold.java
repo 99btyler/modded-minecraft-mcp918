@@ -1,6 +1,7 @@
 package mmmcp.feature.features.cheat.cheats;
 
 import mmmcp.feature.event.Event;
+import mmmcp.feature.event.details.EventType;
 import mmmcp.feature.features.cheat.Cheat;
 
 import java.util.List;
@@ -15,10 +16,10 @@ public class Hold extends Cheat {
     }
 
     @Override
-    protected void fillEventTypes(List<String> eventTypes) {
-        eventTypes.add(Event.clickLeft);
-        eventTypes.add(Event.clickRight);
-        eventTypes.add(Event.livingUpdate);
+    protected void fillEventTypes(List<EventType> eventTypes) {
+        eventTypes.add(EventType.CLICK_LEFT);
+        eventTypes.add(EventType.CLICK_RIGHT);
+        eventTypes.add(EventType.LIVING_UPDATE);
     }
 
     @Override
@@ -32,13 +33,13 @@ public class Hold extends Cheat {
     @Override
     protected void onEvent(Event event) {
 
-        switch (event.getType()) {
+        switch (event.getEventType()) {
 
-            case Event.clickLeft:
+            case CLICK_LEFT:
                 toggle();
                 break;
 
-            case Event.clickRight:
+            case CLICK_RIGHT:
 
                 if (slotToHold == -1) {
                     slotToHold = minecraft.thePlayer.inventory.currentItem;
@@ -46,7 +47,7 @@ public class Hold extends Cheat {
 
                 break;
 
-            case Event.livingUpdate:
+            case LIVING_UPDATE:
 
                 if (minecraft.thePlayer.inventory.currentItem == slotToHold) {
 

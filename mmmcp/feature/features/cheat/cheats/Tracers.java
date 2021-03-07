@@ -1,6 +1,7 @@
 package mmmcp.feature.features.cheat.cheats;
 
 import mmmcp.feature.event.Event;
+import mmmcp.feature.event.details.EventType;
 import mmmcp.feature.features.cheat.Cheat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.Vec3;
@@ -15,14 +16,14 @@ public class Tracers extends Cheat {
     }
 
     @Override
-    protected void fillEventTypes(List<String> eventTypes) {
-        eventTypes.add(Event.renderHand);
+    protected void fillEventTypes(List<EventType> eventTypes) {
+        eventTypes.add(EventType.RENDER_HAND);
     }
 
     @Override
     protected void onEvent(Event event) {
 
-        if (event.getType().equals(Event.renderHand)) {
+        if (event.getEventType() == EventType.RENDER_HAND) {
 
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glDisable(GL11.GL_TEXTURE_2D);
