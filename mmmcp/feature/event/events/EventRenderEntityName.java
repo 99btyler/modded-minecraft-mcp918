@@ -8,13 +8,13 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class EventRenderEntityName extends Event implements Cancelable {
 
-    private RenderManager renderManager;
+    private final RenderManager renderManager;
 
-    private EntityPlayer entityPlayer;
+    private final EntityPlayer entityPlayer;
 
-    private double x;
-    private double y;
-    private double z;
+    private final double x;
+    private final double y;
+    private final double z;
 
     private boolean canceled;
 

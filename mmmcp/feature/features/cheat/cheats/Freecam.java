@@ -19,7 +19,7 @@ public class Freecam extends Cheat {
 
     // 0 = Sneak.isEnabled()
     // 1 = keyBindSneak.pressed
-    private boolean[] wasSneaking = new boolean[2];
+    private final boolean[] wasSneaking = new boolean[2];
 
     private final Timer timer = new Timer(950, 1050);
 

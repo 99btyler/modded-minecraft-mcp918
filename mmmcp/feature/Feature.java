@@ -17,7 +17,7 @@ public abstract class Feature {
     private final List<EventType> eventTypes = new ArrayList<>();
 
     // For the Feature subclasses
-    protected final static Minecraft minecraft = Minecraft.getMinecraft();
+    protected static final Minecraft minecraft = Minecraft.getMinecraft();
 
     public Feature(int keybind) {
 

@@ -9,7 +9,7 @@ import org.lwjgl.input.Keyboard;
 
 public class MMMCP {
 
-    private final static MMMCP instance = new MMMCP();
+    private static final MMMCP instance = new MMMCP();
 
     private final String name = "modded-minecraft-mcp918";
 
@@ -33,7 +33,7 @@ public class MMMCP {
 
     };
 
-    public final static MMMCP getInstance() {
+    public static final MMMCP getInstance() {
         return instance;
     }
 
