@@ -18,21 +18,17 @@ public class Sprint extends Cheat {
     }
 
     @Override
-    protected void onDisable() {
+    protected void onEvent(Event event) {
 
-        minecraft.gameSettings.keyBindSprint.pressed = false;
-        minecraft.thePlayer.setSprinting(false);
+        minecraft.gameSettings.keyBindSprint.pressed = true;
 
     }
 
     @Override
-    protected void onEvent(Event event) {
+    protected void onDisable() {
 
-        if (event.getEventType() == EventType.LIVING_UPDATE) {
-
-            minecraft.gameSettings.keyBindSprint.pressed = true;
-
-        }
+        minecraft.gameSettings.keyBindSprint.pressed = false;
+        minecraft.thePlayer.setSprinting(false);
 
     }
 

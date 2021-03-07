@@ -16,18 +16,15 @@ public class Hold extends Cheat {
     }
 
     @Override
+    public String getTag() {
+        return super.getTag() + (isEnabled() && slotToHold != -1 ? "§r " + (minecraft.thePlayer.inventory.currentItem == slotToHold ? "§a" : "§c") + (slotToHold + 1) : "");
+    }
+
+    @Override
     protected void fillEventTypes(List<EventType> eventTypes) {
         eventTypes.add(EventType.CLICK_LEFT);
         eventTypes.add(EventType.CLICK_RIGHT);
         eventTypes.add(EventType.LIVING_UPDATE);
-    }
-
-    @Override
-    protected void onDisable() {
-
-        slotToHold = -1;
-        minecraft.gameSettings.keyBindUseItem.pressed = false;
-
     }
 
     @Override
@@ -70,8 +67,11 @@ public class Hold extends Cheat {
     }
 
     @Override
-    public String getTag() {
-        return super.getTag() + (isEnabled() && slotToHold != -1 ? "§r " + (minecraft.thePlayer.inventory.currentItem == slotToHold ? "§a" : "§c") + (slotToHold + 1) : "");
+    protected void onDisable() {
+
+        slotToHold = -1;
+        minecraft.gameSettings.keyBindUseItem.pressed = false;
+
     }
 
 }

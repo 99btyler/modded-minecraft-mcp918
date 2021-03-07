@@ -28,34 +28,30 @@ public class Nametags extends Cheat {
     @Override
     protected void onEvent(Event event) {
 
-        if (event.getEventType() == EventType.RENDER_ENTITY_NAME) {
+        final EventRenderEntityName eventRenderEntityName = (EventRenderEntityName)event;
+        eventRenderEntityName.setCanceled(true);
 
-            final EventRenderEntityName eventRenderEntityName = (EventRenderEntityName)event;
-            eventRenderEntityName.setCanceled(true);
+        final RenderManager renderManager = eventRenderEntityName.getRenderManager();
+        final FontRenderer fontRenderer = renderManager.getFontRenderer();
 
-            final RenderManager renderManager = eventRenderEntityName.getRenderManager();
-            final FontRenderer fontRenderer = renderManager.getFontRenderer();
+        final EntityPlayer entityPlayer = eventRenderEntityName.getEntityPlayer();
+        final double x = eventRenderEntityName.getX();
+        double y = eventRenderEntityName.getY();
+        final double z = eventRenderEntityName.getZ();
 
-            final EntityPlayer entityPlayer = eventRenderEntityName.getEntityPlayer();
-            final double x = eventRenderEntityName.getX();
-            double y = eventRenderEntityName.getY();
-            final double z = eventRenderEntityName.getZ();
+        final double distance = minecraft.thePlayer.getDistanceToEntity(entityPlayer);
 
-            final double distance = minecraft.thePlayer.getDistanceToEntity(entityPlayer);
-
-            // SCORE
-            final Scoreboard scoreboard = entityPlayer.getWorldScoreboard();
-            final ScoreObjective scoreObjective = scoreboard.getObjectiveInDisplaySlot(2);
-            if (scoreObjective != null) {
-                final Score score = scoreboard.getValueFromObjective(entityPlayer.getName(), scoreObjective);
-                doLine(renderManager, fontRenderer, entityPlayer, (score.getScorePoints() + " " + scoreObjective.getDisplayName()), distance, x, y, z);
-                y += (fontRenderer.FONT_HEIGHT * 1.15F * 0.025F) + (0.04 * distance);
-            }
-
-            // NAME
-            doLine(renderManager, fontRenderer, entityPlayer, (entityPlayer.getDisplayName().getFormattedText() + "§r | " + (int)distance), distance, x, y, z);
-
+        // SCORE
+        final Scoreboard scoreboard = entityPlayer.getWorldScoreboard();
+        final ScoreObjective scoreObjective = scoreboard.getObjectiveInDisplaySlot(2);
+        if (scoreObjective != null) {
+            final Score score = scoreboard.getValueFromObjective(entityPlayer.getName(), scoreObjective);
+            doLine(renderManager, fontRenderer, entityPlayer, (score.getScorePoints() + " " + scoreObjective.getDisplayName()), distance, x, y, z);
+            y += (fontRenderer.FONT_HEIGHT * 1.15F * 0.025F) + (0.04 * distance);
         }
+
+        // NAME
+        doLine(renderManager, fontRenderer, entityPlayer, (entityPlayer.getDisplayName().getFormattedText() + "§r | " + (int)distance), distance, x, y, z);
 
     }
 

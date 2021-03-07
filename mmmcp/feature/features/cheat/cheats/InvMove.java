@@ -24,16 +24,12 @@ public class InvMove extends Cheat {
     @Override
     protected void onEvent(Event event) {
 
-        if (event.getEventType() == EventType.LIVING_UPDATE) {
-
-            if (!(minecraft.currentScreen instanceof GuiInventory)) {
-                return;
-            }
-
-            KeyBinding.setKeyBindState(minecraft.gameSettings.keyBindForward.getKeyCode(), (Keyboard.isKeyDown(minecraft.gameSettings.keyBindForward.getKeyCode()) || MMMCP.getInstance().getFeature("Walk").isEnabled()));
-            KeyBinding.setKeyBindState(minecraft.gameSettings.keyBindJump.getKeyCode(), (Keyboard.isKeyDown(minecraft.gameSettings.keyBindJump.getKeyCode()) || MMMCP.getInstance().getFeature("Jump").isEnabled()));
-
+        if (!(minecraft.currentScreen instanceof GuiInventory)) {
+            return;
         }
+
+        KeyBinding.setKeyBindState(minecraft.gameSettings.keyBindForward.getKeyCode(), (Keyboard.isKeyDown(minecraft.gameSettings.keyBindForward.getKeyCode()) || MMMCP.getInstance().getFeature("Walk").isEnabled()));
+        KeyBinding.setKeyBindState(minecraft.gameSettings.keyBindJump.getKeyCode(), (Keyboard.isKeyDown(minecraft.gameSettings.keyBindJump.getKeyCode()) || MMMCP.getInstance().getFeature("Jump").isEnabled()));
 
     }
 

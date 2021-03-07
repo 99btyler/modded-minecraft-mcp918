@@ -23,39 +23,35 @@ public class Tracers extends Cheat {
     @Override
     protected void onEvent(Event event) {
 
-        if (event.getEventType() == EventType.RENDER_HAND) {
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDepthMask(false);
 
-            GL11.glEnable(GL11.GL_BLEND);
-            GL11.glDisable(GL11.GL_TEXTURE_2D);
-            GL11.glDisable(GL11.GL_DEPTH_TEST);
-            GL11.glDepthMask(false);
+        for (EntityPlayer entityPlayer : minecraft.theWorld.playerEntities) {
 
-            for (EntityPlayer entityPlayer : minecraft.theWorld.playerEntities) {
-
-                if (entityPlayer == minecraft.thePlayer) {
-                    continue;
-                }
-
-                final int[] rgb = getRGBOfName(entityPlayer.getName(), entityPlayer.getDisplayName().getFormattedText());
-                GL11.glColor4d(rgb[0], rgb[1], rgb[2], .60F - (.01F * minecraft.thePlayer.getDistanceToEntity(entityPlayer)));
-                GL11.glLineWidth(.60F);
-
-                GL11.glBegin(GL11.GL_LINES);
-
-                GL11.glVertex3d(entityPlayer.posX - minecraft.getRenderManager().renderPosX, (entityPlayer.posY + (entityPlayer.height / 2)) - minecraft.getRenderManager().renderPosY, entityPlayer.posZ - minecraft.getRenderManager().renderPosZ);
-                final Vec3 vec3 = new Vec3(0, 0, 1).rotatePitch(-(float)Math.toRadians(minecraft.thePlayer.rotationPitch)).rotateYaw(-(float)Math.toRadians(minecraft.thePlayer.rotationYaw));
-                GL11.glVertex3d(vec3.xCoord, vec3.yCoord + minecraft.thePlayer.getEyeHeight(), vec3.zCoord);
-
-                GL11.glEnd();
-
+            if (entityPlayer == minecraft.thePlayer) {
+                continue;
             }
 
-            GL11.glDisable(GL11.GL_BLEND);
-            GL11.glDepthMask(true);
-            GL11.glEnable(GL11.GL_DEPTH_TEST);
-            GL11.glEnable(GL11.GL_TEXTURE_2D);
+            final int[] rgb = getRGBOfName(entityPlayer.getName(), entityPlayer.getDisplayName().getFormattedText());
+            GL11.glColor4d(rgb[0], rgb[1], rgb[2], .60F - (.01F * minecraft.thePlayer.getDistanceToEntity(entityPlayer)));
+            GL11.glLineWidth(.60F);
+
+            GL11.glBegin(GL11.GL_LINES);
+
+            GL11.glVertex3d(entityPlayer.posX - minecraft.getRenderManager().renderPosX, (entityPlayer.posY + (entityPlayer.height / 2)) - minecraft.getRenderManager().renderPosY, entityPlayer.posZ - minecraft.getRenderManager().renderPosZ);
+            final Vec3 vec3 = new Vec3(0, 0, 1).rotatePitch(-(float)Math.toRadians(minecraft.thePlayer.rotationPitch)).rotateYaw(-(float)Math.toRadians(minecraft.thePlayer.rotationYaw));
+            GL11.glVertex3d(vec3.xCoord, vec3.yCoord + minecraft.thePlayer.getEyeHeight(), vec3.zCoord);
+
+            GL11.glEnd();
 
         }
+
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDepthMask(true);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
 
     }
 

@@ -23,17 +23,13 @@ public class Triggerbot extends Cheat {
     @Override
     protected void onEvent(Event event) {
 
-        if (event.getEventType() == EventType.LIVING_UPDATE) {
+        if (minecraft.currentScreen != null) {
+            toggle();
+            return;
+        }
 
-            if (minecraft.currentScreen != null) {
-                toggle();
-                return;
-            }
-
-            if (timer.hasReached()) {
-                minecraft.clickMouse();
-            }
-
+        if (timer.hasReached()) {
+            minecraft.clickMouse();
         }
 
     }

@@ -34,6 +34,65 @@ public class Freecam extends Cheat {
     }
 
     @Override
+    protected void onEvent(Event event) {
+
+        switch (event.getEventType()) {
+
+            case LIVING_UPDATE:
+
+                if (minecraft.currentScreen != null && !(minecraft.currentScreen instanceof GuiChat)) {
+                    toggle();
+                    return;
+                }
+
+                minecraft.thePlayer.renderArmPitch = 1000f;
+                minecraft.gameSettings.keyBindAttack.pressed = false;
+                minecraft.gameSettings.keyBindUseItem.pressed = false;
+
+                minecraft.thePlayer.noClip = true;
+                if (minecraft.gameSettings.keyBindForward.pressed) {
+                    minecraft.thePlayer.motionX *= 2;
+                    minecraft.thePlayer.motionY = 0;
+                    minecraft.thePlayer.motionZ *= 2;
+                } else {
+                    minecraft.thePlayer.motionX = 0;
+                    minecraft.thePlayer.motionY = 0;
+                    minecraft.thePlayer.motionZ = 0;
+                }
+                if (minecraft.gameSettings.keyBindJump.pressed) {
+                    minecraft.thePlayer.motionY += 1.5;
+                } else if (minecraft.gameSettings.keyBindSneak.pressed) {
+                    minecraft.thePlayer.motionY -= 1.5;
+                }
+
+                break;
+
+            case SEND_PACKET:
+
+                final EventSendPacket eventSendPacket = (EventSendPacket)event;
+                final Packet packet = eventSendPacket.getPacket();
+
+                if (packet instanceof C09PacketHeldItemChange) {
+                    clone.inventory.currentItem = ((C09PacketHeldItemChange)packet).getSlotId();
+                } else if (!(packet instanceof C00PacketKeepAlive) && !(packet instanceof C0FPacketConfirmTransaction) & !(packet instanceof C01PacketChatMessage) & !(packet instanceof C14PacketTabComplete)) {
+                    eventSendPacket.setCanceled(true);
+                }
+
+                if (timer.hasReached()) {
+                    final C03PacketPlayer.C04PacketPlayerPosition position = new C03PacketPlayer.C04PacketPlayerPosition();
+                    position.x = clone.posX;
+                    position.y = clone.posY;
+                    position.z = clone.posZ;
+                    minecraft.thePlayer.sendQueue.addToSendQueue(position);
+                }
+
+                break;
+
+        }
+
+    }
+
+    @Override
     protected void onEnable() {
 
         if (!minecraft.thePlayer.onGround) {
@@ -92,65 +151,6 @@ public class Freecam extends Cheat {
         clone = null;
 
         minecraft.renderGlobal.loadRenderers();
-
-    }
-
-    @Override
-    protected void onEvent(Event event) {
-
-        switch (event.getEventType()) {
-
-            case LIVING_UPDATE:
-
-                if (minecraft.currentScreen != null && !(minecraft.currentScreen instanceof GuiChat)) {
-                    toggle();
-                    return;
-                }
-
-                minecraft.thePlayer.renderArmPitch = 1000f;
-                minecraft.gameSettings.keyBindAttack.pressed = false;
-                minecraft.gameSettings.keyBindUseItem.pressed = false;
-
-                minecraft.thePlayer.noClip = true;
-                if (minecraft.gameSettings.keyBindForward.pressed) {
-                    minecraft.thePlayer.motionX *= 2;
-                    minecraft.thePlayer.motionY = 0;
-                    minecraft.thePlayer.motionZ *= 2;
-                } else {
-                    minecraft.thePlayer.motionX = 0;
-                    minecraft.thePlayer.motionY = 0;
-                    minecraft.thePlayer.motionZ = 0;
-                }
-                if (minecraft.gameSettings.keyBindJump.pressed) {
-                    minecraft.thePlayer.motionY += 1.5;
-                } else if (minecraft.gameSettings.keyBindSneak.pressed) {
-                    minecraft.thePlayer.motionY -= 1.5;
-                }
-
-                break;
-
-            case SEND_PACKET:
-
-                final EventSendPacket eventSendPacket = (EventSendPacket)event;
-                final Packet packet = eventSendPacket.getPacket();
-
-                if (packet instanceof C09PacketHeldItemChange) {
-                    clone.inventory.currentItem = ((C09PacketHeldItemChange)packet).getSlotId();
-                } else if (!(packet instanceof C00PacketKeepAlive) && !(packet instanceof C0FPacketConfirmTransaction) & !(packet instanceof C01PacketChatMessage) & !(packet instanceof C14PacketTabComplete)) {
-                    eventSendPacket.setCanceled(true);
-                }
-
-                if (timer.hasReached()) {
-                    final C03PacketPlayer.C04PacketPlayerPosition position = new C03PacketPlayer.C04PacketPlayerPosition();
-                    position.x = clone.posX;
-                    position.y = clone.posY;
-                    position.z = clone.posZ;
-                    minecraft.thePlayer.sendQueue.addToSendQueue(position);
-                }
-
-                break;
-
-        }
 
     }
 

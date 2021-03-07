@@ -18,22 +18,18 @@ public class Walk extends Cheat {
     }
 
     @Override
-    protected void onDisable() {
+    protected void onEvent(Event event) {
 
-        minecraft.gameSettings.keyBindForward.pressed = false;
+        if (minecraft.currentScreen == null) {
+            minecraft.gameSettings.keyBindForward.pressed = true;
+        }
 
     }
 
     @Override
-    protected void onEvent(Event event) {
+    protected void onDisable() {
 
-        if (event.getEventType() == EventType.LIVING_UPDATE) {
-
-            if (minecraft.currentScreen == null) {
-                minecraft.gameSettings.keyBindForward.pressed = true;
-            }
-
-        }
+        minecraft.gameSettings.keyBindForward.pressed = false;
 
     }
 
