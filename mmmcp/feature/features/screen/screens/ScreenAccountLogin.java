@@ -15,9 +15,9 @@ import net.minecraft.util.Session;
 import java.io.IOException;
 import java.net.Proxy;
 
-public class ScreenAccount extends Screen {
+public class ScreenAccountLogin extends Screen {
 
-    public ScreenAccount(int keybind) {
+    public ScreenAccountLogin(int keybind) {
         super(keybind);
     }
 
@@ -25,11 +25,11 @@ public class ScreenAccount extends Screen {
     protected void onEnable() {
 
         // Enable
-        minecraft.displayGuiScreen(new TheScreenAccount());
+        minecraft.displayGuiScreen(new TheScreenAccountLogin());
 
     }
 
-    private class TheScreenAccount extends GuiScreen {
+    private class TheScreenAccountLogin extends GuiScreen {
 
         private final int gtfWidth = 200;
         private final int gtfHeight = 20;

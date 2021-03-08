@@ -3,7 +3,7 @@ package mmmcp;
 import mmmcp.feature.Feature;
 import mmmcp.feature.event.Event;
 import mmmcp.feature.features.cheat.cheats.*;
-import mmmcp.feature.features.screen.screens.ScreenAccount;
+import mmmcp.feature.features.screen.screens.ScreenAccountLogin;
 import mmmcp.feature.features.screen.screens.ScreenGuiIngame;
 import org.lwjgl.input.Keyboard;
 
@@ -29,7 +29,7 @@ public class MMMCP {
 
             // Screens
             new ScreenGuiIngame(Keyboard.KEY_RSHIFT),
-            new ScreenAccount(Keyboard.KEY_RBRACKET)
+            new ScreenAccountLogin(Keyboard.KEY_RBRACKET)
 
     };
 
