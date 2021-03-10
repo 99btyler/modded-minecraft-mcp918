@@ -57,7 +57,7 @@ public class Tracers extends Cheat {
 
     private int[] getRGBOfName(String actualName, String formattedName) {
 
-        int[] rgb = new int[] {1, 1, 1};
+        final int[] rgb = new int[] {1, 1, 1};
 
         final String preName = formattedName.split(actualName)[0];
 
@@ -67,13 +67,20 @@ public class Tracers extends Cheat {
                 final String colorCode = "§" + preName.charAt(i + 1);
 
                 if (colorCode.equals("§4") || colorCode.equals("§c")) {
-                    rgb = new int[] {1, 0, 0};
+                    // Red: 1, 0, 0
+                    rgb[1] = 0;
+                    rgb[2] = 0;
                 } else if (colorCode.equals("§2") || colorCode.equals("§a")) {
-                    rgb = new int[] {0, 1, 0};
+                    // Green: 0, 1, 0
+                    rgb[0] = 0;
+                    rgb[2] = 0;
                 } else if (colorCode.equals("§1") || colorCode.equals("§3") || colorCode.equals("§9") || colorCode.equals("§b")) {
-                    rgb = new int[] {0, 0, 1};
+                    // Blue: 0, 0, 1
+                    rgb[0] = 0;
+                    rgb[1] = 0;
                 } else if (colorCode.equals("§6") || colorCode.equals("§e") || colorCode.equals("§g")) {
-                    rgb = new int[] {1, 1, 0};
+                    // Yellow: 1, 1, 0
+                    rgb[2] = 0;
                 }
 
             }
