@@ -20,9 +20,11 @@ public class Jump extends Cheat {
     @Override
     protected void onEvent(Event event) {
 
-        if (minecraft.currentScreen == null) {
-            minecraft.gameSettings.keyBindJump.pressed = true;
+        if (minecraft.currentScreen != null) {
+            return;
         }
+
+        minecraft.gameSettings.keyBindJump.pressed = true;
 
     }
 

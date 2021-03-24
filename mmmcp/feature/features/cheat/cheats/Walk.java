@@ -20,9 +20,11 @@ public class Walk extends Cheat {
     @Override
     protected void onEvent(Event event) {
 
-        if (minecraft.currentScreen == null) {
-            minecraft.gameSettings.keyBindForward.pressed = true;
+        if (minecraft.currentScreen != null) {
+            return;
         }
+
+        minecraft.gameSettings.keyBindForward.pressed = true;
 
     }
 
