@@ -16,6 +16,12 @@ public class Timer {
 
         reset();
 
+        if (minDelay > maxDelay) {
+            final int i = minDelay;
+            minDelay = maxDelay;
+            maxDelay = i;
+        }
+
         this.minDelay = minDelay;
         this.maxDelay = maxDelay;
 
