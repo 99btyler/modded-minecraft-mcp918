@@ -70,8 +70,8 @@ public class ScreenAccountLogin extends Screen {
 
             switch (keyCode) {
 
-                // Disable
                 case 1:
+                    // Disable
                     minecraft.displayGuiScreen(null);
                     toggle();
                     break;

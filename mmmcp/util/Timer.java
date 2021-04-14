@@ -4,17 +4,13 @@ import java.util.Random;
 
 public class Timer {
 
-    private double lastTime;
+    private double time = getCurrentTime();
+    private int delay = 0;
 
     private final int minDelay;
     private final int maxDelay;
 
-    private final Random random;
-    private int currentDelay;
-
     public Timer(int minDelay, int maxDelay) {
-
-        reset();
 
         if (minDelay > maxDelay) {
             final int i = minDelay;
@@ -25,22 +21,14 @@ public class Timer {
         this.minDelay = minDelay;
         this.maxDelay = maxDelay;
 
-        random = new Random();
-        currentDelay = 0;
-
     }
 
-    private void reset() {
-        lastTime = getCurrentTime();
-    }
+    public final boolean hasReachedDelay() {
 
-    public final boolean hasReached() {
+        if ((getCurrentTime() - time) >= delay) {
 
-        if ((getCurrentTime() - lastTime) >= currentDelay) {
-
-            reset();
-
-            currentDelay = (random.nextInt(maxDelay - minDelay + 1) + minDelay);
+            time = getCurrentTime();
+            delay = (new Random().nextInt(maxDelay - minDelay + 1) + minDelay);
 
             return true;
 

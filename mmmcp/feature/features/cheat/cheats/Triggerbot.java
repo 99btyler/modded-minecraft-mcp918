@@ -28,7 +28,7 @@ public class Triggerbot extends Cheat {
             return;
         }
 
-        if (timer.hasReached()) {
+        if (timer.hasReachedDelay()) {
             minecraft.clickMouse();
         }
 

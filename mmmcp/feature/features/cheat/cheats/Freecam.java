@@ -17,8 +17,7 @@ public class Freecam extends Cheat {
 
     private EntityOtherPlayerMP clone;
 
-    // 0 = Sneak.isEnabled()
-    // 1 = keyBindSneak.pressed
+    // 0 = Sneak.isEnabled(), 1 = keyBindSneak.pressed
     private final boolean[] wasSneaking = new boolean[2];
 
     private final Timer timer = new Timer(950, 1050);
@@ -50,6 +49,7 @@ public class Freecam extends Cheat {
                 minecraft.gameSettings.keyBindUseItem.pressed = false;
 
                 minecraft.thePlayer.noClip = true;
+
                 if (minecraft.gameSettings.keyBindForward.pressed) {
                     minecraft.thePlayer.motionX *= 2;
                     minecraft.thePlayer.motionY = 0;
@@ -59,6 +59,7 @@ public class Freecam extends Cheat {
                     minecraft.thePlayer.motionY = 0;
                     minecraft.thePlayer.motionZ = 0;
                 }
+
                 if (minecraft.gameSettings.keyBindJump.pressed) {
                     minecraft.thePlayer.motionY += 1.5;
                 } else if (minecraft.gameSettings.keyBindSneak.pressed) {
@@ -78,12 +79,16 @@ public class Freecam extends Cheat {
                     eventSendPacket.setCanceled(true);
                 }
 
-                if (timer.hasReached()) {
+                if (timer.hasReachedDelay()) {
+
                     final C03PacketPlayer.C04PacketPlayerPosition position = new C03PacketPlayer.C04PacketPlayerPosition();
+
                     position.x = clone.posX;
                     position.y = clone.posY;
                     position.z = clone.posZ;
+
                     minecraft.thePlayer.sendQueue.addToSendQueue(position);
+
                 }
 
                 break;
