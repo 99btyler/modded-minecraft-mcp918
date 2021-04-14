@@ -23,7 +23,7 @@ public abstract class Feature {
 
         this.keybind = keybind;
 
-        fillEventTypes(eventTypes);
+        registerEventTypes(eventTypes);
 
     }
 
@@ -63,7 +63,7 @@ public abstract class Feature {
         System.out.println(name + ".onDisable() wasn't overridden");
     }
 
-    protected void fillEventTypes(List<EventType> eventTypes) {
+    protected void registerEventTypes(List<EventType> eventTypes) {
         System.out.println(name + ".fillEventTypes() wasn't overridden");
     }
 

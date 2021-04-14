@@ -27,7 +27,7 @@ public class Freecam extends Cheat {
     }
 
     @Override
-    protected void fillEventTypes(List<EventType> eventTypes) {
+    protected void registerEventTypes(List<EventType> eventTypes) {
         eventTypes.add(EventType.LIVING_UPDATE);
         eventTypes.add(EventType.SEND_PACKET);
     }

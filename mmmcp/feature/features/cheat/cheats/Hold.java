@@ -21,7 +21,7 @@ public class Hold extends Cheat {
     }
 
     @Override
-    protected void fillEventTypes(List<EventType> eventTypes) {
+    protected void registerEventTypes(List<EventType> eventTypes) {
         eventTypes.add(EventType.CLICK_LEFT);
         eventTypes.add(EventType.CLICK_RIGHT);
         eventTypes.add(EventType.LIVING_UPDATE);

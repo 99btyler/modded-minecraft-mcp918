@@ -21,7 +21,7 @@ public class Nametags extends Cheat {
     }
 
     @Override
-    protected void fillEventTypes(List<EventType> eventTypes) {
+    protected void registerEventTypes(List<EventType> eventTypes) {
         eventTypes.add(EventType.RENDER_ENTITY_NAME);
     }
 
