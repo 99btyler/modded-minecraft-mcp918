@@ -11,16 +11,8 @@ public class Timer {
     private final int maxDelay;
 
     public Timer(int minDelay, int maxDelay) {
-
-        if (minDelay > maxDelay) {
-            final int i = minDelay;
-            minDelay = maxDelay;
-            maxDelay = i;
-        }
-
         this.minDelay = minDelay;
         this.maxDelay = maxDelay;
-
     }
 
     public final boolean hasReachedDelay() {
