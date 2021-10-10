@@ -1,4 +1,4 @@
-package mmmcp.feature.event.details;
+package mmmcp.feature.event;
 
 public enum EventType {
 

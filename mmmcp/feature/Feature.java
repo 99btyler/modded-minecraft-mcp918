@@ -1,7 +1,7 @@
 package mmmcp.feature;
 
 import mmmcp.feature.event.Event;
-import mmmcp.feature.event.details.EventType;
+import mmmcp.feature.event.EventType;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 

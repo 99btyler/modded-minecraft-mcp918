@@ -2,7 +2,7 @@ package mmmcp.feature.features.cheat.cheats;
 
 import mmmcp.MMMCP;
 import mmmcp.feature.event.Event;
-import mmmcp.feature.event.details.EventType;
+import mmmcp.feature.event.EventType;
 import mmmcp.feature.event.events.EventSendPacket;
 import mmmcp.feature.features.cheat.Cheat;
 import mmmcp.util.Timer;

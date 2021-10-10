@@ -1,7 +1,5 @@
 package mmmcp.feature.event;
 
-import mmmcp.feature.event.details.EventType;
-
 public abstract class Event {
 
     private final EventType eventType;
