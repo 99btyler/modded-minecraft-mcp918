@@ -34,7 +34,7 @@ public class Tracers extends Cheat {
                 continue;
             }
 
-            final int[] rgb = getRGBOfName(entityPlayer.getName(), entityPlayer.getDisplayName().getFormattedText());
+            final int[] rgb = getRGBOfName(entityPlayer.getDisplayName().getFormattedText(), entityPlayer.getName());
             GL11.glColor4d(rgb[0], rgb[1], rgb[2], .60F - (.01F * minecraft.thePlayer.getDistanceToEntity(entityPlayer)));
             GL11.glLineWidth(.60F);
 
@@ -55,11 +55,11 @@ public class Tracers extends Cheat {
 
     }
 
-    private int[] getRGBOfName(String actualName, String formattedName) {
-
-        final int[] rgb = new int[] {1, 1, 1};
+    private int[] getRGBOfName(String formattedName, String actualName) {
 
         final String preName = formattedName.split(actualName)[0];
+
+        final int[] rgb = new int[] {1, 1, 1};
 
         for (int i = preName.length() - 1; i >= 0; i--) {
             if (String.valueOf(preName.charAt(i)).equals("§")) {
