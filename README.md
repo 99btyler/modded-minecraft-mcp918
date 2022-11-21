@@ -1,5 +1,4 @@
 # modded-minecraft-mcp918
-![modded-minecraft-mcp918 gif](https://i.imgur.com/o40P2kX.gif)
 
 # Getting Started
 Get this project set up locally
