@@ -4,15 +4,11 @@
 # Getting Started
 Get this project set up locally
 ### Prerequisites
-* Own a copy of Minecraft
-* Have a 1.8.8 version folder by launching Minecraft 1.8.8 at least once
+* Own a copy of Minecraft so you can create a 1.8.8 version folder
+* Have a decompiled mcp918 (http://www.modcoderpack.com/)
 ### Setting up
-* Clone this repository
-* Download mcp918.zip from http://www.modcoderpack.com/
-* Unzip it, then move it to this repository's local folder
-* Using terminal, navigate to the mcp918 folder. Then, run decompile.sh or decompile.bat
-* From this repository's local folder, copy the mmmcp folder. Navigate to mcp918/src/minecraft and paste it there
-* Using a Java IDE, open mcp918/eclipse
+* Once you have a decompiled mcp918, copy the mmmcp folder from this repository to mcp918/src/minecraft
+* Using your Java IDE, open mcp918/eclipse
 * Because mcp918 allows me to change Minecraft code, I did. However, I don't include any minecraft code files in this repository so you must manually add this required code to the files:
 
 ```java
